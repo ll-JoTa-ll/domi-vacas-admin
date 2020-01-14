@@ -1,0 +1,74 @@
+<div class="content">
+    <h1 mat-dialog-title>Detalle de Itinerario: {{data.title}}</h1>
+    <form [formGroup]="itineraryForm">
+        <div mat-dialog-content>
+
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="title" autocomplete="off">
+                <mat-error *ngIf="isInvalid(itineraryForm.controls.title)">
+                    {{getErrorMessage(itineraryForm.controls.title)}}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="description" autocomplete="off"></textarea>
+                <mat-error *ngIf="isInvalid(itineraryForm.controls.description)">
+                    {{getErrorMessage(itineraryForm.controls.description)}}
+                </mat-error>
+            </mat-form-field>
+
+            <button *ngIf="idItineraryDetail===''; else updateItineraryDetail" mat-mini-fab matTooltip="Agregar Detalle" (click)="addItinerary()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+
+            <ng-template #updateItineraryDetail>
+                <button mat-mini-fab matTooltip="Actualizar Itinerario" (click)="onUpdateItinerary()">
+                    <mat-icon>save</mat-icon>
+                  </button>
+                <button mat-mini-fab matTooltip="Cancelar" (click)="resetItinerary()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+            </ng-template>
+
+            <br>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef> Título </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Editar </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button aria-label="icon-button" (click)="editItinerary(element)">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef> Eliminar</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button aria-label="icon-button" (click)="removeItinerary(element.id)">
+                            <mat-icon>remove</mat-icon>
+                          </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()">Cancelar</button>
+            <button mat-button (click)="save()" cdkFocusInitial>Grabar</button>
+        </div>
+    </form>
+</div>

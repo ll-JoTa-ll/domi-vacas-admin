@@ -1,0 +1,59 @@
+.dm-form-field {
+    width: 200px;
+    margin: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+.dm-margin {
+    margin: 0 10px;
+}
+
+.dm-center {
+    margin: 0 auto;
+}
+
+.image {
+    width: 500px;
+}
+
+.content {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.tab-content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dm-input-file {
+    background: #eeeeee;
+    padding: 20px 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.dm-error {
+    color: #f44336;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.dm-img-icon {
+    width: 33px;
+    height: 33px;
+}
+
+.itinerary-detail {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}

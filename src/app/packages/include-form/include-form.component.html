@@ -1,0 +1,36 @@
+<div class="content">
+    <h1 mat-dialog-title>{{title}}</h1>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <form [formGroup]="includeForm" *ngIf="!loading">
+        <div mat-dialog-content>
+            <div class="content">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Título</mat-label>
+                    <input matInput formControlName="title" autocomplete="off">
+                    <mat-error *ngIf="isInvalid(includeForm.controls.title, true)">
+                        {{getErrorMessage(includeForm.controls.title)}}
+                    </mat-error>
+                </mat-form-field>
+
+                <br>
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="description" autocomplete="off">
+                    <mat-error *ngIf="isInvalid(includeForm.controls.description, true)">
+                        {{getErrorMessage(includeForm.controls.description)}}
+                    </mat-error>
+                </mat-form-field>
+
+                <br>
+                <mat-label>Icono:</mat-label><span *ngIf="isInvalid(includeForm.controls.icon, false)" class="dm-error">{{getErrorMessage(includeForm.controls.icon)}}</span>
+                <div class="icons">
+                    <img *ngFor="let icon of icons" [src]="utils.getUrlIcon(icon.name)" [ngClass]="{'icon-selected': icon.id === iconSelected.id}" class="icon" (click)="selectIcon(icon)">
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()">Cancelar</button>
+            <button mat-button (click)="save()" cdkFocusInitial>Grabar</button>
+        </div>
+    </form>
+</div>

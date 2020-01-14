@@ -1,0 +1,25 @@
+.dm-form-field {
+    width: 200px;
+    margin: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+.dm-margin {
+    margin: 0 10px;
+}
+
+.dm-center {
+    margin: 0 auto;
+}
+
+.dm-table {
+    width: 70%;
+    margin: 0 auto;
+}
