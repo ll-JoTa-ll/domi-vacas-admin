@@ -23,3 +23,8 @@ button {
     width: 70%;
     margin: 0 auto;
 }
+
+.title {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,10 +1,10 @@
 import { FlightItinerary } from './flight-itinerary.model';
 
 export class Price {
-    id: number;
+    id: string;
     isHotelHtml: boolean;
     hotelHtml: string;
-    idHotel: number;
+    idHotel: string;
     isFlightHtml: boolean;
     flightHtml: string;
     flightItinerary: FlightItinerary[];
@@ -14,7 +14,11 @@ export class Price {
     child: number;
     infant: number;
     stock: number;
+    stockChild: number;
+    stockInfant: number;
     isActive: boolean;
     beginDate: string;
     endDate: string;
+    idDeparture: string;
+    new: boolean;
 }

@@ -1,7 +1,11 @@
 <div class="dm-table">
-    <h1>Paquetes</h1>
+    <div class="title">
+        <h1>Paquetes</h1>
+        <button mat-raised-button class="dm-button" (click)="logout()">Cerrar Sesión</button>
+    </div>
+
     <mat-divider></mat-divider>
-    <button mat-raised-button (click)="create()">Crear Paquete</button>
+    <button mat-raised-button class="dm-button" (click)="create()">Crear Paquete</button>
     <br>
     <mat-form-field class="dm-form-field">
         <input matInput type="text" placeholder="Nombre" [(ngModel)]="name" autocomplete="off">
@@ -10,15 +14,8 @@
         </button>
     </mat-form-field>
     <button mat-raised-button (click)="search()">Buscar</button>
-    <!-- <mat-divider></mat-divider> -->
     <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
-    <!-- <div class="dm-table"> -->
     <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <!-- <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container> -->
 
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -44,35 +41,30 @@
                 <div>
                     <mat-checkbox (change)="changeStatus(element)" [(ngModel)]="element.isActive" [disabled]="updateTable"></mat-checkbox>
                 </div>
-
-                <!-- <div><span *ngIf="element.isActive">Activo</span>
-                        <span *ngIf="!element.isActive">Bloqueado</span></div> -->
-
             </td>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Acción </th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-raised-button (click)="changeStatus(element)" [disabled]="updateTable">
-                        <span *ngIf="element.isActive">Bloquear</span>
-                        <span *ngIf="!element.isActive">Activar</span>
-                    </button>
-                </td>
-            </ng-container> -->
 
         <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef> Editar </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button aria-label="icon-button">
+                <button mat-icon-button aria-label="icon-button" (click)="edit(element.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                <!-- <button mat-raised-button (click)="edit(element.id)">Editar</button> -->
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="copy">
+            <th mat-header-cell *matHeaderCellDef> Duplicar </th>
+            <td mat-cell *matCellDef="let element">
+                <div>
+                    <button mat-icon-button aria-label="icon-button" (click)="openCloneDialog(element)">
+                        <mat-icon>file_copy</mat-icon>
+                      </button>
+                </div>
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <!-- </div> -->
 </div>

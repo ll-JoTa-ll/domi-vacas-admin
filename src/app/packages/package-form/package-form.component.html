@@ -1,19 +1,21 @@
 <div class="content">
-
-    <h2>Crear Paquete</h2>
-    <form [formGroup]="packageForm">
+    <h2>{{title}}</h2>
+    <h4 *ngIf="update">{{packageForm?.controls.name.value}}</h4>
+    <mat-progress-bar *ngIf="loading" class="dm-center" mode="indeterminate"></mat-progress-bar>
+    <form [formGroup]="packageForm" *ngIf="!loading">
         <div class="action">
-            <button mat-raised-button (click)="sendFormData()">Guardar</button>
+            <button class="dm-button button-content" mat-raised-button (click)="save()">Guardar</button>
         </div>
-        <mat-progress-bar *ngIf="loading" class="dm-center" mode="indeterminate"></mat-progress-bar>
-        <div *ngIf="!loading" class="content">
+
+        <div class="content">
 
             <mat-tab-group>
                 <mat-tab label="Datos Principales">
                     <div class="tab-content">
+
                         <mat-form-field appearance="outline" class="dm-form-field">
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="name" autocomplete="off">
+                            <input matInput formControlName="name" autocomplete="off" maxlength="30">
                             <mat-error *ngIf="isInvalid(packageForm.controls.name)">
                                 {{getErrorMessage(packageForm.controls.name)}}
                             </mat-error>
@@ -28,24 +30,24 @@
                             </mat-error>
                         </mat-form-field>
                         <br>
-                        <mat-label>Duración:</mat-label>
+                        <mat-label class="dm-margin">Duración:</mat-label>
                         <br>
-                        <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-form-field appearance="outline" class="dm-form-field-number">
                             <mat-label>Días</mat-label>
-                            <input matInput placeholder="Días" formControlName="days" autocomplete="off">
+                            <input matInput type="number" placeholder="Días" formControlName="days" autocomplete="off">
                             <mat-error *ngIf="isInvalid(packageForm.controls.days)">
                                 {{getErrorMessage(packageForm.controls.days)}}
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-form-field appearance="outline" class="dm-form-field-number">
                             <mat-label>Noches</mat-label>
-                            <input matInput placeholder="Noches" formControlName="nights" autocomplete="off">
+                            <input matInput type="number" placeholder="Noches" formControlName="nights" autocomplete="off">
                             <mat-error *ngIf="isInvalid(packageForm.controls.nights)">
                                 {{getErrorMessage(packageForm.controls.nights)}}
                             </mat-error>
                         </mat-form-field>
                         <br>
-                        <mat-checkbox formControlName="inShowCase">Ver en vitrina</mat-checkbox>
+                        <mat-checkbox class="dm-margin" formControlName="inShowCase">Ver en vitrina</mat-checkbox>
 
                         <br>
                         <br>
@@ -64,9 +66,19 @@
                         <br>
                         <mat-form-field appearance="outline" class="dm-form-field">
                             <mat-label>Palabra Clave</mat-label>
-                            <input matInput formControlName="keyword" autocomplete="off">
+                            <input matInput formControlName="keyword" autocomplete="off" maxlength="20">
                             <mat-error *ngIf="isInvalid(packageForm.controls.keyword)">
                                 {{getErrorMessage(packageForm.controls.keyword)}}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <br>
+                        <mat-form-field appearance="outline" class="dm-form-field">
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha Venta" formControlName="expirationDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="isInvalid(packageForm.controls.expirationDate)">
+                                {{getErrorMessage(packageForm.controls.expirationDate)}}
                             </mat-error>
                         </mat-form-field>
 
@@ -79,30 +91,28 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <!-- <mat-form-field appearance="outline">
-                        <input matInput [matDatepicker]="picker" placeholder="Fecha Venta" formControlName="salesDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="isInvalid(packageForm.controls.salesDate)">
-                            {{getErrorMessage(packageForm.controls.salesDate)}}
-                        </mat-error>
-                    </mat-form-field> -->
-
-
                         <br>
-                        <mat-label>Imagen Principal</mat-label>
-                        <div class="image">
-                            <input class="dm-input-file" type="file" formControlName="urlImage" accept="image/png, image/jpeg" (change)="onFileChangeImage($event, 'urlImage')" />
-                            <div class="dm-error" *ngIf="isInvalid(packageForm.controls.urlImage)">{{getErrorMessage(packageForm.controls.urlImage)}}</div>
+                        <div class="dm-margin">
+                            <mat-label>Imagen Principal</mat-label>
+                            <div class="image">
+                                <input class="dm-input-file" type="file" accept="image/png, image/jpeg" (change)="onFileChange($event, 'fileImage')" />
+                                <div class="dm-error" *ngIf="isInvalid(packageForm.controls.urlImage)">{{getErrorMessage(packageForm.controls.urlImage)}}</div>
+                            </div>
+                            <img *ngIf="update && !changeImage && package" [src]="getUrlImage(package.urlImage)" class="preview-main-image">
                         </div>
 
                         <br>
                         <br>
-                        <mat-label>Imagen Vitrina</mat-label>
-                        <div class="image">
-                            <input class="dm-input-file" type="file" formControlName="urlImageShowCase" accept="image/png, image/jpeg" (change)="onFileChangeImageShowCase($event, 'urlImage')" />
-                            <div class="dm-error" *ngIf="isInvalid(packageForm.controls.urlImageShowCase)">{{getErrorMessage(packageForm.controls.urlImageShowCase)}}</div>
+                        <div class="dm-margin">
+                            <mat-label>Imagen Vitrina</mat-label>
+                            <div class="image">
+                                <input class="dm-input-file" type="file" accept="image/png, image/jpeg" (change)="onFileChange($event, 'fileImageShowCase')" />
+                                <div class="dm-error" *ngIf="isInvalid(packageForm.controls.urlImageShowCase)">{{getErrorMessage(packageForm.controls.urlImageShowCase)}}</div>
+                            </div>
+                            <img *ngIf="update && !changeImageShowCase && package" [src]="getUrlImage(package.urlImageShowCase)" class="preview-case-image">
                         </div>
+
+
                     </div>
                 </mat-tab>
                 <mat-tab label="Incluye">
@@ -111,19 +121,20 @@
                         <br>
                         <div *ngFor="let amenity of amenities">
                             <label>
-                          <input type="checkbox" [value]="amenity.id" (change)="onCheckChange($event)">
+                          <input type="checkbox" [value]="amenity.id" (change)="onCheckChange($event)" [checked]=amenity.checked>
                           {{amenity.description}}
                         </label>
                         </div>
                         <br>
                         <br>
 
-                        <mat-label>El paquete incluye:</mat-label>
-                        <mat-radio-group aria-label="Select an option" formControlName="isIncludeHtml">
-                            <mat-radio-button value="1">Html</mat-radio-button>
-                            <mat-radio-button value="2">Plus</mat-radio-button>
+                        <mat-label>El paquete incluye:</mat-label><br>
+                        <mat-radio-group class="dm-margin" aria-label="Select an option" formControlName="isIncludeHtml">
+                            <mat-radio-button class="dm-margin" value="1">Text</mat-radio-button>
+                            <mat-radio-button class="dm-margin" value="2">Plus</mat-radio-button>
                         </mat-radio-group>
-                        <br>
+                        <!-- <mat-icon matTooltip="Text: Ingrese información separada por saltos de línea\nPlus: Ingrese información detallada">help</mat-icon> -->
+                        <div class="dm-margin message"><span>Text: Ingrese información separada por saltos de línea</span><br><span>Plus: Ingrese información detallada</span></div>
                         <br>
                         <div *ngIf="packageForm.controls.isIncludeHtml.value === '1'; else insertInclude">
                             <!-- <angular-editor id="editor1" formControlName="includeHtml" [config]="config"></angular-editor> -->
@@ -171,7 +182,7 @@
                                 <ng-container matColumnDef="delete">
                                     <th mat-header-cell *matHeaderCellDef> Eliminar</th>
                                     <td mat-cell *matCellDef="let element">
-                                        <button mat-icon-button aria-label="icon-button" (click)="removeInclude(element.id)">
+                                        <button mat-icon-button aria-label="icon-button" (click)="removeInclude(element)">
                                             <mat-icon>remove</mat-icon>
                                           </button>
                                     </td>
@@ -187,9 +198,11 @@
                 <mat-tab label="Itinerario">
                     <div class="tab-content">
                         <mat-radio-group aria-label="Select an option" formControlName="isItineraryHtml">
-                            <mat-radio-button value="1">Html</mat-radio-button>
-                            <mat-radio-button value="2">Plus</mat-radio-button>
+                            <mat-radio-button class="dm-margin" value="1">Html</mat-radio-button>
+                            <mat-radio-button class="dm-margin" value="2">Plus</mat-radio-button>
                         </mat-radio-group>
+                        <div class="dm-margin message"><span>Html: Ingrese información en formato html</span><br><span>Plus: Ingrese información detallada</span></div>
+                        <br>
                         <div *ngIf="packageForm.controls.isItineraryHtml.value === '1'; else insertItinerary">
                             <angular-editor id="editor2" formControlName="itineraryHtml" [config]="config"></angular-editor>
                         </div>
@@ -244,7 +257,7 @@
                                     <ng-container matColumnDef="delete">
                                         <th mat-header-cell *matHeaderCellDef> Eliminar</th>
                                         <td mat-cell *matCellDef="let element">
-                                            <button mat-icon-button aria-label="icon-button" (click)="removeItinerary(element.id)">
+                                            <button mat-icon-button aria-label="icon-button" (click)="removeItinerary(element)">
                                                 <mat-icon>remove</mat-icon>
                                               </button>
                                         </td>
@@ -262,23 +275,25 @@
                 </mat-tab>
                 <mat-tab label="Precios">
                     <div class="tab-content">
-                        <button mat-raised-button (click)="addPrice()">Agregar</button>
+                        <button mat-mini-fab matTooltip="Agregar Precio" (click)="addPrice()">
+                            <mat-icon>add</mat-icon>
+                          </button>
                         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                             <ng-container matColumnDef="beginDate">
                                 <th mat-header-cell *matHeaderCellDef> Fec. Inicio </th>
-                                <td mat-cell *matCellDef="let element"> {{element.beginDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{utils.formatDateddmmyyyy(element.beginDate)}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="endDate">
                                 <th mat-header-cell *matHeaderCellDef> Fec. Fin </th>
-                                <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{utils.formatDateddmmyyyy(element.endDate)}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="hotel">
+                            <!-- <ng-container matColumnDef="hotel">
                                 <th mat-header-cell *matHeaderCellDef> Hotel </th>
                                 <td mat-cell *matCellDef="let element"> {{element.isHotelHtml}} </td>
-                            </ng-container>
+                            </ng-container> -->
 
                             <ng-container matColumnDef="simple">
                                 <th mat-header-cell *matHeaderCellDef> Single </th>
@@ -300,9 +315,19 @@
                                 <td mat-cell *matCellDef="let element"> {{element.child}} </td>
                             </ng-container>
 
+                            <ng-container matColumnDef="stockChild">
+                                <th mat-header-cell *matHeaderCellDef> StockChild </th>
+                                <td mat-cell *matCellDef="let element"> {{element.stockChild}} </td>
+                            </ng-container>
+
                             <ng-container matColumnDef="infant">
                                 <th mat-header-cell *matHeaderCellDef> Infant </th>
                                 <td mat-cell *matCellDef="let element"> {{element.infant}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="stockInfant">
+                                <th mat-header-cell *matHeaderCellDef> Stock Infant </th>
+                                <td mat-cell *matCellDef="let element"> {{element.stockInfant}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="stock">
@@ -310,15 +335,17 @@
                                 <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="flight">
+                            <!-- <ng-container matColumnDef="flight">
                                 <th mat-header-cell *matHeaderCellDef> Vuelo </th>
                                 <td mat-cell *matCellDef="let element"> {{element.isFlightHtml}} </td>
-                            </ng-container>
+                            </ng-container> -->
 
                             <ng-container matColumnDef="edit">
-                                <th mat-header-cell *matHeaderCellDef> Edición </th>
+                                <th mat-header-cell *matHeaderCellDef> Editar </th>
                                 <td mat-cell *matCellDef="let element">
-                                    <button mat-raised-button (click)="editPrice(element.id)">Editar</button>
+                                    <button mat-icon-button aria-label="icon-button" (click)="editPrice(element)">
+                                        <mat-icon>edit</mat-icon>
+                                      </button>
                                 </td>
                             </ng-container>
 
@@ -330,18 +357,18 @@
                 <mat-tab label="Condiciones">
                     <div class="tab-content">
                         <mat-form-field appearance="outline" class="dm-form-field">
-                            <mat-label>Condiciones</mat-label>
-                            <textarea matInput formControlName="conditions" autocomplete="off" placeholder="Ingrese html"></textarea>
-                            <mat-error *ngIf="isInvalid(packageForm.controls.conditions)">
-                                {{getErrorMessage(packageForm.controls.conditions)}}
+                            <mat-label>Regulaciones</mat-label>
+                            <textarea matInput formControlName="regulations" autocomplete="off" placeholder="Ingrese html"></textarea>
+                            <mat-error *ngIf="isInvalid(packageForm.controls.regulations)">
+                                {{getErrorMessage(packageForm.controls.regulations)}}
                             </mat-error>
                         </mat-form-field>
                         <br>
                         <mat-form-field appearance="outline" class="dm-form-field">
-                            <mat-label>Restricciones</mat-label>
-                            <textarea matInput formControlName="restrictions" autocomplete="off" placeholder="Ingrese html"></textarea>
-                            <mat-error *ngIf="isInvalid(packageForm.controls.restrictions)">
-                                {{getErrorMessage(packageForm.controls.restrictions)}}
+                            <mat-label>Condiciones</mat-label>
+                            <textarea matInput formControlName="conditions" autocomplete="off" placeholder="Ingrese html"></textarea>
+                            <mat-error *ngIf="isInvalid(packageForm.controls.conditions)">
+                                {{getErrorMessage(packageForm.controls.conditions)}}
                             </mat-error>
                         </mat-form-field>
                     </div>

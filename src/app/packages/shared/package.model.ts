@@ -13,10 +13,11 @@ export class Package {
     nights: number;
     idCategory: string;
     notes: string;
+    fileImage: string;
+    fileImageShowCase: string;
     urlImage: string;
     urlImageShowCase: string;
     destiny: string;
-    saleDate: string;
 
     amenities: string[];
     isIncludeHtml: boolean;
@@ -31,4 +32,6 @@ export class Package {
 
     regulations: string;
     conditions: string;
+    expirationDate: string;
+    idUser: string;
 }

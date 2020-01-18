@@ -3,5 +3,7 @@ export class Include {
     title: string;
     description: string;
     icon: string;
-    iconId: string;
+    idIcon: string;
+    new: boolean = false;
+    isActive: boolean;
 }

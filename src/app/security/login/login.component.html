@@ -1,0 +1,31 @@
+<div class="container1">
+    <div class="content1">
+        <h1>Login</h1>
+        <mat-progress-spinner mode="indeterminate" *ngIf="loading"></mat-progress-spinner>
+        <form [formGroup]="loginForm" *ngIf="!loading">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="user" autocomplete="off">
+                <button mat-icon-button matSuffix>
+                    <mat-icon>person</mat-icon>
+                    </button>
+                <mat-error *ngIf="isInvalid(loginForm.controls.user, true)">
+                    {{getErrorMessage(loginForm.controls.user)}}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Contraseña</mat-label>
+                <input matInput formControlName="pass" autocomplete="off" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                <mat-error *ngIf="isInvalid(loginForm.controls.pass, true)">
+                    {{getErrorMessage(loginForm.controls.pass)}}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button class="dm-button" (click)="login()">Ingresar</button>
+        </form>
+    </div>
+</div>

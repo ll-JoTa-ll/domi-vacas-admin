@@ -19,12 +19,28 @@ export class PackageService {
         return this.http.get<Response<Package[]>>(config.getPackageListUrl(config.PACKAGE_LIST_METHOD), {params});
     }
 
+    get(id: string) {
+        const method = config.PACKAGE_GET_METHOD + config.SLASH + id;
+        return this.http.get<Response<Package>>(config.getPackageDetailUrl(method));
+    }
+
+    copy(ob) {
+        // const method = config.PACKAGE_COPY_METHOD + config.SLASH + id;
+        return this.http.post<Response<Package>>(config.getPackageCopylUrl(config.PACKAGE_COPY_METHOD), ob);
+    }
+
     save(pack: Package) {
         return this.http.post<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_SAVE_METHOD), pack);
     }
 
     saveFormData(formdata: FormData) {
-        return this.http.post<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_SAVE_METHOD_FORM), formdata);
+        // return this.http.post<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_SAVE_METHOD_FORM), formdata);
+        return this.http.post<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_SAVE_METHOD), formdata);
+    }
+
+    updateFormData(formdata: FormData) {
+        // return this.http.post<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_SAVE_METHOD_FORM), formdata);
+        return this.http.put<Response<Package[]>>(config.getPackageSaveUrl(config.PACKAGE_UPDATE_METHOD), formdata);
     }
 
     savePack(formdata) {
@@ -44,5 +60,9 @@ export class PackageService {
         const params = new HttpParams()
         .set('search', name);
         return this.http.get<Response<Package[]>>(config.getHotelsUrl(config.HOTELS_SELECT_METHOD), {params});
+    }
+
+    getAirlines() {
+        return this.http.get<Response<Package[]>>(config.getAirlinesUrl(config.AIRLINE_SELECT_METHOD));
     }
 }

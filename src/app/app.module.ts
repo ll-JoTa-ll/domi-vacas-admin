@@ -30,6 +30,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { IncludeFormComponent } from './packages/include-form/include-form.component';
 import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/itinerary-detail-form.component';
+import { DialogNotificationComponent } from './notifications/dialog-notification/dialog-notification.component';
+import { LoginComponent } from './security/login/login.component';
+import { DialogClonePackageComponent } from './packages/dialog-clone-package/dialog-clone-package.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
     PackageFormComponent,
     PriceFormComponent,
     IncludeFormComponent,
-    ItineraryDetailFormComponent
+    ItineraryDetailFormComponent,
+    DialogNotificationComponent,
+    LoginComponent,
+    DialogClonePackageComponent
   ],
   imports: [
     BrowserModule,
@@ -66,14 +72,21 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
     AngularEditorModule,
     MatTooltipModule,
     RouterModule.forRoot([
-      { path: '', component: PackageListComponent },
+      { path: '', component: LoginComponent },
+      { path: 'package/list', component: PackageListComponent },
       { path: 'package/form', component: PackageFormComponent }
     ]),
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
   ],
-  entryComponents: [ PriceFormComponent, IncludeFormComponent, ItineraryDetailFormComponent ],
+  entryComponents: [ 
+    PriceFormComponent, 
+    IncludeFormComponent, 
+    ItineraryDetailFormComponent, 
+    DialogNotificationComponent,
+    DialogClonePackageComponent
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

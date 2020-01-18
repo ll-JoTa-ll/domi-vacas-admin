@@ -65,8 +65,8 @@ export class IncludeFormComponent implements OnInit {
       this.title = 'Editar Incluye';
       title = this.data.title;
       description = this.data.description;
-      icon = this.data.iconId;
-      this.iconSelected.id = this.data.iconId;
+      icon = this.data.idIcon;
+      this.iconSelected.id = this.data.idIcon;
       this.iconSelected.name = this.data.icon;
     }
 
@@ -115,7 +115,7 @@ export class IncludeFormComponent implements OnInit {
     include.title = this.includeForm.controls.title.value;
     include.description = this.includeForm.controls.description.value;
     include.icon = this.iconSelected.name;
-    include.iconId = this.iconSelected.id;
+    include.idIcon = this.iconSelected.id;
     this.dialogRef.close(include);
   }
 

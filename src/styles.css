@@ -1,4 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.dm-button {
+    background: #d84315;
+    color: white;
+}
+
+.dm-margin {
+    margin: 8px;
+}
+
+.message {
+    font-size: 12px;
+    font-style: italic;
+    color: #616161;
+}
+
+.dm-form-field {
+    width: 300px;
+    margin: 8px;
+}
+
+.dm-form-field-number {
+    width: 200px;
+    margin: 8px;
+}

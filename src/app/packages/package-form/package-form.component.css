@@ -1,5 +1,10 @@
 .dm-form-field {
-    width: 200px;
+    width: 300px;
+    margin: 8px;
+}
+
+.dm-form-field-number {
+    width: 100px;
     margin: 8px;
 }
 
@@ -56,4 +61,21 @@ button {
     text-decoration: underline;
     color: blue;
     cursor: pointer;
+}
+
+.preview-main-image {
+    width: 200px;
+}
+
+.preview-case-image {
+    width: 100px;
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-content {
+    padding: 5px 40px !important;
 }

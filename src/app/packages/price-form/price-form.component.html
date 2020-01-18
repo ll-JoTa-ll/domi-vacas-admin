@@ -1,34 +1,34 @@
-<h1 mat-dialog-title>Agregar Precio</h1>
+<h1 mat-dialog-title>{{title}}</h1>
 <form [formGroup]="priceForm">
     <div mat-dialog-content>
         <div class="content">
 
             <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Fecha Inicio</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Fecha Inicio" formControlName="beginDate" autocomplete="off">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1 disabled="false"></mat-datepicker>
-                <mat-error *ngIf="isInvalid(priceForm.controls.beginDate)">
+                <mat-error *ngIf="isInvalid(priceForm.controls.beginDate, true)">
                     {{getErrorMessage(priceForm.controls.beginDate)}}
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Fecha Fin</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="Fecha Fin" formControlName="endDate" autocomplete="off">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2 disabled="false"></mat-datepicker>
-                <mat-error *ngIf="isInvalid(priceForm.controls.endDate)">
+                <mat-error *ngIf="isInvalid(priceForm.controls.endDate, true)">
                     {{getErrorMessage(priceForm.controls.endDate)}}
                 </mat-error>
             </mat-form-field>
-
-
             <br>
             <mat-label>Información de hotel:</mat-label>
             <mat-radio-group aria-label="Select an option" formControlName="isHotelHtml">
                 <mat-radio-button value="1">Html</mat-radio-button>
                 <mat-radio-button value="2">Plus</mat-radio-button>
             </mat-radio-group>
-            <br>
+            <div class="dm-margin message"><span>Html: Ingrese información en formato html</span><br><span>Plus: Ingrese información detallada</span></div>
             <br>
             <div *ngIf="priceForm.controls.isHotelHtml.value === '1'; else selectHotel">
                 <angular-editor id="editor2" formControlName="hotelHtml" [config]="config"></angular-editor>
@@ -48,7 +48,7 @@
                             {{hotel.description}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.idhotel)">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.idhotel, true)">
                         {{getErrorMessage(priceForm.controls.idhotel)}}
                     </mat-error>
                 </mat-form-field>
@@ -57,55 +57,73 @@
             <br>
             <div class="price-content">
                 <mat-label>Precios:</mat-label>
+
                 <br>
-                <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-form-field appearance="outline" class="dm-form-field-number">
                     <mat-label>Single</mat-label>
-                    <input matInput formControlName="single" autocomplete="off">
+                    <input type="number" matInput formControlName="single" autocomplete="off">
                     <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.single)">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.single, true)">
                         {{getErrorMessage(priceForm.controls.single)}}
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-form-field appearance="outline" class="dm-form-field-number">
                     <mat-label>Double</mat-label>
-                    <input matInput formControlName="double" autocomplete="off">
+                    <input type="number" matInput formControlName="double" autocomplete="off">
                     <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.double)">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.double, true)">
                         {{getErrorMessage(priceForm.controls.double)}}
                     </mat-error>
                 </mat-form-field>
-                <br>
-                <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-form-field appearance="outline" class="dm-form-field-number">
                     <mat-label>Triple</mat-label>
-                    <input matInput formControlName="triple" autocomplete="off">
+                    <input type="number" matInput formControlName="triple" autocomplete="off">
                     <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.triple)">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.triple, true)">
                         {{getErrorMessage(priceForm.controls.triple)}}
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="dm-form-field">
+                <br>
+                <mat-form-field appearance="outline" class="dm-form-field-number">
                     <mat-label>Child</mat-label>
-                    <input matInput formControlName="child" autocomplete="off">
+                    <input type="number" matInput formControlName="child" autocomplete="off">
                     <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.child)">
+                    <mat-hint>-1: Restringido, 0: Sin costo</mat-hint>
+                    <mat-error *ngIf="isInvalid(priceForm.controls.child, true)">
                         {{getErrorMessage(priceForm.controls.child)}}
                     </mat-error>
                 </mat-form-field>
+                <mat-form-field appearance="outline" class="dm-form-field-number">
+                    <mat-label>Stock Child</mat-label>
+                    <input type="number" matInput formControlName="stockChild" autocomplete="off">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.stockChild, true)">
+                        {{getErrorMessage(priceForm.controls.stockChild)}}
+                    </mat-error>
+                </mat-form-field>
                 <br>
-                <!-- <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-form-field appearance="outline" class="dm-form-field-number">
                     <mat-label>Infant</mat-label>
-                    <input matInput formControlName="infant" autocomplete="off">
+                    <input type="number" matInput formControlName="infant" autocomplete="off">
                     <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="isInvalid(priceForm.controls.infant)">
+                    <mat-hint>-1: Restringido, 0: Sin costo</mat-hint>
+                    <mat-error *ngIf="isInvalid(priceForm.controls.infant, true)">
                         {{getErrorMessage(priceForm.controls.infant)}}
                     </mat-error>
-                </mat-form-field> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="dm-form-field-number">
+                    <mat-label>Stock Infant</mat-label>
+                    <input type="number" matInput formControlName="stockInfant" autocomplete="off">
+                    <mat-error *ngIf="isInvalid(priceForm.controls.stockInfant, true)">
+                        {{getErrorMessage(priceForm.controls.stockInfant)}}
+                    </mat-error>
+                </mat-form-field>
             </div>
             <br>
-            <mat-form-field appearance="outline" class="dm-form-field">
+            <mat-form-field appearance="outline" class="dm-form-field-number">
                 <mat-label>Stock</mat-label>
-                <input matInput formControlName="stock" autocomplete="off">
-                <mat-error *ngIf="isInvalid(priceForm.controls.stock)">
+                <input type="number" matInput formControlName="stock" autocomplete="off">
+                <mat-error *ngIf="isInvalid(priceForm.controls.stock, true)">
                     {{getErrorMessage(priceForm.controls.stock)}}
                 </mat-error>
             </mat-form-field>
@@ -117,7 +135,7 @@
                 <mat-radio-button value="1">Html</mat-radio-button>
                 <mat-radio-button value="2">Plus</mat-radio-button>
             </mat-radio-group>
-            <br>
+            <div class="dm-margin message"><span>Html: Ingrese información en formato html</span><br><span>Plus: Ingrese información detallada</span></div>
             <br>
             <div *ngIf="priceForm.controls.isFlightHtml.value==='1'; else selectFlight">
                 <angular-editor id="editor3" formControlName="flightHtml" [config]="config"></angular-editor>
@@ -130,6 +148,138 @@
                 </mat-form-field> -->
             </div>
             <ng-template #selectFlight>
+
+
+                <form [formGroup]="flightItineraryForm">
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Origen</mat-label>
+                        <input matInput formControlName="origin" autocomplete="off">
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.origin, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.origin)}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Destino</mat-label>
+                        <input matInput formControlName="destiny" autocomplete="off">
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.destiny, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.destiny)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Fecha Salida</mat-label>
+                        <input matInput [matDatepicker]="dpDeparture" placeholder="Fecha Salida" formControlName="departure" autocomplete="off">
+                        <mat-datepicker-toggle matSuffix [for]="dpDeparture"></mat-datepicker-toggle>
+                        <mat-datepicker #dpDeparture disabled="false"></mat-datepicker>
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.departure, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.departure)}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Fecha Llegada</mat-label>
+                        <input matInput [matDatepicker]="dpArrive" placeholder="Fecha Llegada" formControlName="arrive" autocomplete="off">
+                        <mat-datepicker-toggle matSuffix [for]="dpArrive"></mat-datepicker-toggle>
+                        <mat-datepicker #dpArrive disabled="false"></mat-datepicker>
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.arrive, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.arrive)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Hora Salida</mat-label>
+                        <input matInput formControlName="beginHours" autocomplete="off">
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.beginHours, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.beginHours)}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Hora Llegada</mat-label>
+                        <input matInput formControlName="endHours" autocomplete="off">
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.endHours, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.endHours)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline" class="dm-form-field">
+                        <mat-label>Aerolinea</mat-label>
+                        <mat-select formControlName="airlineId">
+                            <mat-option *ngFor="let airline of airlines" [value]="airline.id">
+                                {{airline.description}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="isInvalid(flightItineraryForm.controls.airlineId, false)">
+                            {{getErrorMessage(flightItineraryForm.controls.airlineId)}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button *ngIf="idFlightItinerary===''; else updateFlightItinerary" mat-mini-fab matTooltip="Agregar" (click)="addFlightItinerary()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+
+                    <ng-template #updateFlightItinerary>
+                        <button mat-mini-fab matTooltip="Actualizar" (click)="onUpdateFlightItinerary()">
+                            <mat-icon>save</mat-icon>
+                          </button>
+                        <button mat-mini-fab matTooltip="Cancelar" (click)="resetFlightItinerary()">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                    </ng-template>
+
+                    <br>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="origin">
+                            <th mat-header-cell *matHeaderCellDef> Origen </th>
+                            <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="destiny">
+                            <th mat-header-cell *matHeaderCellDef> Destino </th>
+                            <td mat-cell *matCellDef="let element"> {{element.destiny}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="departure">
+                            <th mat-header-cell *matHeaderCellDef> Salida </th>
+                            <td mat-cell *matCellDef="let element"> {{utils.formatddmmyyyy(element.departure)}} - {{element.beginHours}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="arrive">
+                            <th mat-header-cell *matHeaderCellDef> Llegada </th>
+                            <td mat-cell *matCellDef="let element"> {{utils.formatddmmyyyy(element.arrive)}} - {{element.endHours}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="airline">
+                            <th mat-header-cell *matHeaderCellDef> Aerolinea </th>
+                            <td mat-cell *matCellDef="let element"> {{element.airline}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell *matHeaderCellDef> Editar </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button aria-label="icon-button" (click)="editFlightItinerary(element)">
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef> Eliminar</th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button aria-label="icon-button" (click)="removeFlightItinerary(element)">
+                                    <mat-icon>remove</mat-icon>
+                                  </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </form>
+
+
+
             </ng-template>
 
         </div>

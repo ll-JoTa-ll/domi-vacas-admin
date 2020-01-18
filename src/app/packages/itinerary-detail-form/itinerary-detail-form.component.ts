@@ -32,7 +32,7 @@ export class ItineraryDetailFormComponent implements OnInit {
 
   initForm() {
     this.details = this.data.litinerayPackageDetail;
-    this.dataSource = [...this.details];
+    this.refreshItinerary();
     this.itineraryForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required]
@@ -62,14 +62,16 @@ export class ItineraryDetailFormComponent implements OnInit {
 
     const detail = new ItineraryDetail();
     detail.id = (this.details.length + 1).toString();
+    detail.new = true;
+    detail.isActive = true;
     detail.title = this.itineraryForm.controls.title.value;
     detail.description = this.itineraryForm.controls.description.value;
     this.details.push(detail);
-    this.dataSource = [...this.details];
+    this.refreshItinerary();
     this.itineraryForm.reset();
   }
 
-  editItinerary(itinerary: Itinerary) {
+  editItinerary(itinerary: ItineraryDetail) {
     this.idItineraryDetail = itinerary.id;
     this.itineraryForm.controls.title.setValue(itinerary.title);
     this.itineraryForm.controls.description.setValue(itinerary.description);
@@ -85,9 +87,18 @@ export class ItineraryDetailFormComponent implements OnInit {
     this.resetItinerary();
   }
 
-  removeItinerary(id: string) {
-    this.details = this.details.filter(x => x.id !== id);
-    this.dataSource = [...this.details];
+  removeItinerary(itineraryDetail: ItineraryDetail) {
+    if (itineraryDetail.new) {
+      this.details = this.details.filter(x => x.id !== itineraryDetail.id);
+    } else {
+      itineraryDetail.isActive = false;
+    }
+    this.refreshItinerary();
+  }
+
+  refreshItinerary() {
+    console.log(this.details);
+    this.dataSource = [...this.details.filter(x => x.isActive === true)];
   }
 
   resetItinerary() {
@@ -97,6 +108,8 @@ export class ItineraryDetailFormComponent implements OnInit {
 
   save() {
     this.data.litinerayPackageDetail = this.details;
+    this.data.details = this.details.filter(x => x.isActive === true).length;
+    console.log('details: ', this.data.details);
     this.dialogRef.close(this.data);
   }
 

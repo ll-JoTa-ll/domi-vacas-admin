@@ -6,4 +6,6 @@ export class ItineraryDetail{
     description: string;
     latitude: number;
     longitude: number;
+    new: boolean;
+    isActive: boolean;
 }
