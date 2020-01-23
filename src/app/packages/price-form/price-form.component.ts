@@ -314,15 +314,15 @@ export class PriceFormComponent implements OnInit {
       return;
     }
 
-    if (this.priceForm.controls.isHotelHtml.value === '1' && this.priceForm.controls.hotelHtml.value === '') {
-      this.openSnackBar('Ingrese html para hotel');
-      return;
-    }
+    // if (this.priceForm.controls.isHotelHtml.value === '1' && this.priceForm.controls.hotelHtml.value === '') {
+    //   this.openSnackBar('Ingrese html para hotel');
+    //   return;
+    // }
 
-    if (this.priceForm.controls.isFlightHtml.value === '1' && this.priceForm.controls.flightHtml.value === '') {
-      this.openSnackBar('Ingrese html para vuelo');
-      return;
-    }
+    // if (this.priceForm.controls.isFlightHtml.value === '1' && this.priceForm.controls.flightHtml.value === '') {
+    //   this.openSnackBar('Ingrese html para vuelo');
+    //   return;
+    // }
 
     if (this.priceForm.controls.isFlightHtml.value === '2' && this.flightItineraries.length <= 0) {
       this.openSnackBar('Ingrese al menos un itinerario de vuelo');

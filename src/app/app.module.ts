@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PackageListComponent } from './packages/package-list/package-list.component';
 import { PackageFormComponent } from './packages/package-form/package-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +33,12 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
 import { DialogNotificationComponent } from './notifications/dialog-notification/dialog-notification.component';
 import { LoginComponent } from './security/login/login.component';
 import { DialogClonePackageComponent } from './packages/dialog-clone-package/dialog-clone-package.component';
+
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'package/list', component: PackageListComponent },
+  { path: 'package/form', component: PackageFormComponent }
+];
 
 @NgModule({
   declarations: [
@@ -71,19 +77,15 @@ import { DialogClonePackageComponent } from './packages/dialog-clone-package/dia
     MatNativeDateModule,
     AngularEditorModule,
     MatTooltipModule,
-    RouterModule.forRoot([
-      { path: '', component: LoginComponent },
-      { path: 'package/list', component: PackageListComponent },
-      { path: 'package/form', component: PackageFormComponent }
-    ]),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
   ],
-  entryComponents: [ 
-    PriceFormComponent, 
-    IncludeFormComponent, 
-    ItineraryDetailFormComponent, 
+  entryComponents: [
+    PriceFormComponent,
+    IncludeFormComponent,
+    ItineraryDetailFormComponent,
     DialogNotificationComponent,
     DialogClonePackageComponent
    ],

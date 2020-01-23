@@ -45,6 +45,7 @@ export class PackageFormComponent implements OnInit {
   amenities: Amenities[] = [];
   uploadedFiles: any[] = [];
   loading: boolean;
+  sending: boolean;
   dataSource = [];
   includeDataSource = [];
   itineraryDataSource = [];
@@ -730,8 +731,6 @@ export class PackageFormComponent implements OnInit {
     pack.includes = includeCopy;
     pack.isItineraryHtml = this.packageForm.controls.isItineraryHtml.value === '1';
 
-    
-
 
     const itinerariesCopy = [];
     let copyItinerary: Itinerary;
@@ -857,7 +856,7 @@ export class PackageFormComponent implements OnInit {
   sendPackageService(form: FormData) {
 
     if (this.update) {
-      this.loading = true;
+      this.sending = true;
       this.packageService.updateFormData(form).subscribe(
         x => {
           if (x.confirmation) {
@@ -870,14 +869,14 @@ export class PackageFormComponent implements OnInit {
         err => {
           console.log('error: ' + err);
           this.showNotification('Error al actualizar el paquete, por favor solicite la revisión');
-          this.loading = false;
+          this.sending = false;
         },
         () => {
-          this.loading = false;
+          this.sending = false;
         }
       );
     } else {
-      this.loading = true;
+      this.sending = true;
       this.packageService.saveFormData(form).subscribe(
         x => {
           if (x.confirmation) {
@@ -890,10 +889,10 @@ export class PackageFormComponent implements OnInit {
         err => {
           console.log('error: ' + err);
           this.showNotification('Error al registrar el paquete, por favor solicite la revisión');
-          this.loading = false;
+          this.sending = false;
         },
         () => {
-          this.loading = false;
+          this.sending = false;
         }
       );
     }

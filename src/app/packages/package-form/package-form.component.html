@@ -2,9 +2,10 @@
     <h2>{{title}}</h2>
     <h4 *ngIf="update">{{packageForm?.controls.name.value}}</h4>
     <mat-progress-bar *ngIf="loading" class="dm-center" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="sending" class="dm-center" mode="indeterminate"></mat-progress-bar>
     <form [formGroup]="packageForm" *ngIf="!loading">
         <div class="action">
-            <button class="dm-button button-content" mat-raised-button (click)="save()">Guardar</button>
+            <button class="dm-button button-content" mat-raised-button (click)="save()" [disabled]="sending">Guardar</button>
         </div>
 
         <div class="content">
@@ -20,7 +21,6 @@
                                 {{getErrorMessage(packageForm.controls.name)}}
                             </mat-error>
                         </mat-form-field>
-
                         <br>
                         <mat-form-field appearance="outline" class="dm-form-field">
                             <mat-label>Descripción</mat-label>

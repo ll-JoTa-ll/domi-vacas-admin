@@ -33,8 +33,8 @@ export function formatDateddmmyyyy(stringDate: string) {
       if ((date.getMonth() + 1) < 10) {
         mm = '0' + mm;
       }
-      // const format = dd + '/' + mm + '/' + yyyy;
-      const format = mm + '/' + dd + '/' + yyyy;
+      const format = dd + '/' + mm + '/' + yyyy;
+      // const format = mm + '/' + dd + '/' + yyyy;
       return format;
     } else {
       return '';
