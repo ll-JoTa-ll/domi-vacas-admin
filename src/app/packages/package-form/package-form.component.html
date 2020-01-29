@@ -140,7 +140,7 @@
                             <!-- <angular-editor id="editor1" formControlName="includeHtml" [config]="config"></angular-editor> -->
                             <mat-form-field appearance="outline" class="dm-form-field">
                                 <mat-label>Incluye</mat-label>
-                                <textarea matInput formControlName="includeHtml" autocomplete="off" placeholder="Ingrese html"></textarea>
+                                <textarea matInput formControlName="includeHtml" autocomplete="off"></textarea>
                                 <mat-error *ngIf="isInvalid(packageForm.controls.includeHtml)">
                                     {{getErrorMessage(packageForm.controls.includeHtml)}}
                                 </mat-error>
@@ -192,6 +192,19 @@
                                 <tr mat-row *matRowDef="let row; columns: displayedIncludeColumns;"></tr>
                             </table>
                         </ng-template>
+
+                        <mat-label>El paquete NO incluye:</mat-label><br>
+                        <div class="dm-margin message"><span>Ingrese información separada por saltos de línea</span></div>
+                        <div>
+                            <mat-form-field appearance="outline" class="dm-form-field">
+                                <mat-label>No Incluye</mat-label>
+                                <textarea matInput formControlName="noIncludeHtml" autocomplete="off"></textarea>
+                                <mat-error *ngIf="isInvalid(packageForm.controls.noIncludeHtml)">
+                                    {{getErrorMessage(packageForm.controls.noIncludeHtml)}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
                     </div>
 
                 </mat-tab>

@@ -1,7 +1,7 @@
-// export const baseUrl = 'http://172.16.7.99:8015/';
+export const baseUrl = 'http://172.16.7.99:8015/';
 // export const baseUrl = 'http://172.16.7.99:63862/';
 // export const baseUrl = 'http://52.190.24.114/vacation/';    //uat
-export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
+// export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
 
 export const PACKAGE_LIST_METHOD = 'VacationPackage/List';
 export const PACKAGE_GET_METHOD = 'VacationPackage/Edit';

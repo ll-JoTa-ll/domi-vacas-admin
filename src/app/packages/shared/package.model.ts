@@ -34,4 +34,5 @@ export class Package {
     conditions: string;
     expirationDate: string;
     idUser: string;
+    noIncludeHtml: string;
 }

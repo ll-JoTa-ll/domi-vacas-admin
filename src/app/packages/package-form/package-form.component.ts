@@ -243,6 +243,7 @@ export class PackageFormComponent implements OnInit {
     }
     this.packageForm.controls.isIncludeHtml.setValue(this.package.isIncludeHtml ? '1' : '2');
     this.packageForm.controls.includeHtml.setValue(this.package.includeHtml);
+    this.packageForm.controls.noIncludeHtml.setValue(this.package.noIncludeHtml);
     this.packageForm.controls.isItineraryHtml.setValue(this.package.isItineraryHtml ? '1' : '2');
     this.packageForm.controls.itineraryHtml.setValue(this.package.itineraryHtml);
     this.packageForm.controls.conditions.setValue(this.package.conditions);
@@ -327,6 +328,7 @@ export class PackageFormComponent implements OnInit {
       amenities: new FormArray([]),
       isIncludeHtml: ['1'],
       includeHtml: [''],
+      noIncludeHtml: [''],
       isItineraryHtml: ['1'],
       itineraryHtml: [''],
       conditions: ['', Validators.required],
@@ -719,6 +721,7 @@ export class PackageFormComponent implements OnInit {
       pack.includeHtml = '';
     }
 
+    pack.noIncludeHtml = this.packageForm.controls.noIncludeHtml.value;
 
     const includeCopy = [...this.includes];
 
