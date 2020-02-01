@@ -1,7 +1,7 @@
-export const baseUrl = 'http://172.16.7.99:8015/';
+// export const baseUrl = 'http://172.16.7.99:8015/';
 // export const baseUrl = 'http://172.16.7.99:63862/';
 // export const baseUrl = 'http://52.190.24.114/vacation/';    //uat
-// export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
+export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
 
 export const PACKAGE_LIST_METHOD = 'VacationPackage/List';
 export const PACKAGE_GET_METHOD = 'VacationPackage/Edit';
@@ -20,8 +20,9 @@ export const PACKAGE_COPY_METHOD = 'VacationPackage/Clone';
 export const PACKAGE_SAVE_METHOD_FORM = 'VacationPackage/upload1';
 
 
-export const urlIcons = 'https://vacationuatsa.z13.web.core.windows.net/icons/';
-export const urlImages = 'https://vacationadminuatsa.blob.core.windows.net/images/';
+export const urlIcons = 'http://vacationadminuatsa.blob.core.windows.net/icons/'; //uat
+// export const urlIcons = 'http://vacationadminprdsa.blob.core.windows.net/icons/'; //prd
+// export const urlImages = 'https://vacationadminuatsa.blob.core.windows.net/images/';
 
 export const LIMIT_OF_AMENITIES = 4;
 

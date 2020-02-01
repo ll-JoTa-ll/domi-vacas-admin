@@ -809,7 +809,9 @@ export class PackageFormComponent implements OnInit {
       copyDeparture.new = departure.new;
       copyDeparture.isActive = departure.isActive;
       copyDeparture.prices = pr;
-      dep.push(copyDeparture);
+      if (copyDeparture.prices.length > 0) {
+        dep.push(copyDeparture);
+      }
     });
 
     pack.departures = dep;
@@ -851,7 +853,7 @@ export class PackageFormComponent implements OnInit {
     form.append('fileImage', this.packageForm.controls.fileImage.value);
     form.append('fileImageShowCase', this.packageForm.controls.fileImageShowCase.value);
 
-    console.log(this.createFormData(pack));
+    // console.log(this.createFormData(pack));
 
     this.sendPackageService(form);
   }
