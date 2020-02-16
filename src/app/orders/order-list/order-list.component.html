@@ -1,0 +1,133 @@
+<div class="dm-table">
+    <div class="title">
+        <h1>Historial de ordenes</h1>
+        <button mat-mini-fab color="secondary" (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+    </div>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
+    <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.payementType === 'PE' && element.ocip">
+                    <div class="status" [ngClass]="{'green': element.ocip.status === 'Cancelado', 'red': element.ocip.status === 'Pendiente' || element.ocip.status === 'Expirado'}"></div>
+                </div>
+                <div *ngIf="element.payementType === 'VISA' && element.ocip">
+                    <div class="status" [ngClass]="{'green': element.ovisa.status === 'Cancelado', 'red': element.ovisa.status === 'Pendiente' || element.ovisa.status === 'Expirado'}"></div>
+                </div>
+                <!--<div class="status" [ngClass]="{'green': element.status === '1', 'red': element.status === '2'}"></div>-->
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.payementType === 'PE' && element.ocip">{{element.ocip.description}}</div>
+                <div *ngIf="element.payementType === 'VISA' && element.ovisa">{{element.ovisa.description}}</div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Fecha y Hora </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.payementType === 'PE' && element.ocip">{{element.ocip.payementDate | date: 'd/M/yy, h:mm a'}}</div>
+                <div *ngIf="element.payementType === 'VISA' && element.ovisa">{{element.ovisa.payementDate | date: 'd/M/yy, h:mm a'}}</div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="packageName">
+            <th mat-header-cell *matHeaderCellDef> Nombre Paquete </th>
+            <td mat-cell *matCellDef="let element"> {{element.namePackage}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contactName">
+            <th mat-header-cell *matHeaderCellDef> Persona de Contacto </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ocontact">
+                    {{element.ocontact.name}} {{element.ocontact.lastName}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contactPhone">
+            <th mat-header-cell *matHeaderCellDef> Número de Contacto </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ocontact">
+                    {{element.ocontact.phone}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total Paquete (usd) </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="payementType">
+            <th mat-header-cell *matHeaderCellDef> Medio de Pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.payementType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cip">
+            <th mat-header-cell *matHeaderCellDef> CIP </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ocip">
+                    {{element.ocip.code}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expirationDateCip">
+            <th mat-header-cell *matHeaderCellDef> Fecha Expiración CIP </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ocip">
+                    {{element.ocip.ExpireDate | date: 'd/M/yy, h:mm a'}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderVisa">
+            <th mat-header-cell *matHeaderCellDef> Número de Orden Visa </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ovisa">
+                    {{element.ovisa.order}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="errorCodeVisa">
+            <th mat-header-cell *matHeaderCellDef> Código Error Visa </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ovisa?.oError">
+                    {{element.ovisa.oError.code}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="errorDescriptionVisa">
+            <th mat-header-cell *matHeaderCellDef> Descripción Error Visa </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ovisa?.oError">
+                    {{element.ovisa.oError.description}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sector">
+            <th mat-header-cell *matHeaderCellDef> Sector </th>
+            <td mat-cell *matCellDef="let element"> {{element.sector}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="transactionDate">
+            <th mat-header-cell *matHeaderCellDef> Fecha y Hora Transacción </th>
+            <td mat-cell *matCellDef="let element"> {{element.transactionDate | date: 'd/M/yy, h:mm a'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

@@ -33,11 +33,13 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
 import { DialogNotificationComponent } from './notifications/dialog-notification/dialog-notification.component';
 import { LoginComponent } from './security/login/login.component';
 import { DialogClonePackageComponent } from './packages/dialog-clone-package/dialog-clone-package.component';
+import { OrderListComponent } from './orders/order-list/order-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'package/list', component: PackageListComponent },
-  { path: 'package/form', component: PackageFormComponent }
+  { path: 'package/form', component: PackageFormComponent },
+  { path: 'orders', component: OrderListComponent }
 ];
 
 @NgModule({
@@ -50,7 +52,8 @@ const routes: Routes = [
     ItineraryDetailFormComponent,
     DialogNotificationComponent,
     LoginComponent,
-    DialogClonePackageComponent
+    DialogClonePackageComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

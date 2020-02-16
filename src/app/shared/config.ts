@@ -16,8 +16,9 @@ export const ICON_LIST_METHOD = 'Icon/List';
 export const AIRLINE_SELECT_METHOD = 'Airline/Combo';
 export const LOGIN_METHOD = 'User/Login';
 export const PACKAGE_COPY_METHOD = 'VacationPackage/Clone';
-
 export const PACKAGE_SAVE_METHOD_FORM = 'VacationPackage/upload1';
+
+export const ORDER_LIST_METHOD = 'Report/SalesReport';
 
 
 export const urlIcons = 'http://vacationadminuatsa.blob.core.windows.net/icons/'; //uat
@@ -119,6 +120,14 @@ export function getPackageDetailUrl(method: string) {
 }
 
 export function getPackageCopylUrl(method: string) {
+    if (DEBUG) {
+        return '';
+    } else {
+        return baseUrl + 'api/' + method;
+    }
+}
+
+export function getOrdersUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {

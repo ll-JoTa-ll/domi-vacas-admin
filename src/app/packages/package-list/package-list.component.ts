@@ -34,7 +34,6 @@ export class PackageListComponent implements OnInit {
 
   ngOnInit() {
     this.userId = sessionStorage.getItem('userId');
-    console.log(this.userId);
     if (!this.userId || this.userId === '') {
       this.router.navigate(['']);
     } else {

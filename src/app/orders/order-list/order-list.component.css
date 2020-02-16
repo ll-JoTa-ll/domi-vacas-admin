@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+.dm-margin {
+    margin: 0 10px;
+}
+
+.dm-center {
+    margin: 0 auto;
+}
+
+.dm-table {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.title {
+    display: flex;
+}
+
+.status {
+    height: 20px;
+    width: 20px;
+    background: gray;
+    border-radius: 50%;
+}
+
+.green {
+    background: green;
+}
+
+.red {
+    background: red;
+}
