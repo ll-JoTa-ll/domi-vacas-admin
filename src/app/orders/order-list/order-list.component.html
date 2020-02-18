@@ -14,12 +14,11 @@
             <th mat-header-cell *matHeaderCellDef> Estado </th>
             <td mat-cell *matCellDef="let element">
                 <div *ngIf="element.payementType === 'PE' && element.ocip">
-                    <div class="status" [ngClass]="{'green': element.ocip.status === 'Cancelado', 'red': element.ocip.status === 'Pendiente' || element.ocip.status === 'Expirado'}"></div>
+                    <div class="status" [ngClass]="{'green': element.ocip.status === 'Cancelado', 'red':  element.ocip.status === 'Expirado', 'hidden': element.ocip.status === 'Pendiente'}"></div>
                 </div>
-                <div *ngIf="element.payementType === 'VISA' && element.ocip">
-                    <div class="status" [ngClass]="{'green': element.ovisa.status === 'Cancelado', 'red': element.ovisa.status === 'Pendiente' || element.ovisa.status === 'Expirado'}"></div>
+                <div *ngIf="element.payementType === 'VISA' && element.ovisa">
+                    <div class="status" [ngClass]="{'green': element.ovisa.status === 'Cancelado', 'red': element.ovisa.status === 'Error'}"></div>
                 </div>
-                <!--<div class="status" [ngClass]="{'green': element.status === '1', 'red': element.status === '2'}"></div>-->
             </td>
         </ng-container>
 
@@ -58,6 +57,15 @@
             <td mat-cell *matCellDef="let element">
                 <div *ngIf="element.ocontact">
                     {{element.ocontact.phone}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contactMail">
+            <th mat-header-cell *matHeaderCellDef> Correo </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.ocontact">
+                    {{element.ocontact.email}}
                 </div>
             </td>
         </ng-container>

@@ -20,6 +20,7 @@ export class OrderListComponent implements OnInit {
     'packageName',
     'contactName',
     'contactPhone',
+    'contactMail',
     'total',
     'payementType',
     'cip',
@@ -37,11 +38,12 @@ export class OrderListComponent implements OnInit {
     private orderService: OrderService,
   ) { }
 
+
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.getOrders();
-    // }, 500);
     this.getOrders();
+    setInterval(() => {
+      this.getOrders();
+    }, 300000);
   }
 
   getOrders() {
@@ -50,7 +52,6 @@ export class OrderListComponent implements OnInit {
       x => {
         // if (x.confirmation) {
           this.dataSource = x;
-          console.log(this.dataSource);
           // this.dataSource = this.getDemo();
         // }
       },
