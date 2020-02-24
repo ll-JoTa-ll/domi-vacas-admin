@@ -1,7 +1,9 @@
+import { environment } from 'src/environments/environment';
+
 // export const baseUrl = 'http://172.16.7.99:8015/';
 // export const baseUrl = 'http://172.16.7.99:63862/';
 // export const baseUrl = 'http://52.190.24.114/vacation/';    //uat
-export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
+// export const baseUrl = 'http://52.142.32.21/vacation/'; //produccion
 
 export const PACKAGE_LIST_METHOD = 'VacationPackage/List';
 export const PACKAGE_GET_METHOD = 'VacationPackage/Edit';
@@ -17,13 +19,7 @@ export const AIRLINE_SELECT_METHOD = 'Airline/Combo';
 export const LOGIN_METHOD = 'User/Login';
 export const PACKAGE_COPY_METHOD = 'VacationPackage/Clone';
 export const PACKAGE_SAVE_METHOD_FORM = 'VacationPackage/upload1';
-
 export const ORDER_LIST_METHOD = 'Report/SalesReport';
-
-
-export const urlIcons = 'http://vacationadminuatsa.blob.core.windows.net/icons/'; //uat
-// export const urlIcons = 'http://vacationadminprdsa.blob.core.windows.net/icons/'; //prd
-// export const urlImages = 'https://vacationadminuatsa.blob.core.windows.net/images/';
 
 export const LIMIT_OF_AMENITIES = 4;
 
@@ -34,7 +30,7 @@ export function getPackageListUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e16498534000024f3406a7a';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -42,7 +38,7 @@ export function getPackageSaveUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -50,7 +46,7 @@ export function getLoginUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -58,7 +54,7 @@ export function getPackageUpdateStatus(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -66,7 +62,7 @@ export function getUploadImageUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -74,7 +70,7 @@ export function getCategorySelectUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e164bb534000071eb406a7c';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -82,7 +78,7 @@ export function getAmenitiesUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e16531434000097e7406a86';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -90,7 +86,7 @@ export function getHotelsUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -98,7 +94,7 @@ export function getAirlinesUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e1e3de83600001cf4c746a8';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -106,16 +102,15 @@ export function getIconListUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e1cb74e3200002b002287f6';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
 export function getPackageDetailUrl(method: string) {
     if (DEBUG) {
         return 'http://www.mocky.io/v2/5e208aaa300000d796d1f0d5';
-        // return 'http://www.mocky.io/v2/5e1f9bc4310000c477189a00';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -123,7 +118,7 @@ export function getPackageCopylUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }
 
@@ -131,6 +126,6 @@ export function getOrdersUrl(method: string) {
     if (DEBUG) {
         return '';
     } else {
-        return baseUrl + 'api/' + method;
+        return environment.baseUrl + method;
     }
 }

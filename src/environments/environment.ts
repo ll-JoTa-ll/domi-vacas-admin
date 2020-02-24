@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'https://domiruth-uat.azure-api.net/vacation/',
+  urlIcons: 'https://vacationadminuatsa.blob.core.windows.net/icons/',
+  subsKey: 'eb85131bc9d94c02840aa6961e7f77e9',
 };
 
 /*

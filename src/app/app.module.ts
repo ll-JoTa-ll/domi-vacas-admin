@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,6 +34,7 @@ import { DialogNotificationComponent } from './notifications/dialog-notification
 import { LoginComponent } from './security/login/login.component';
 import { DialogClonePackageComponent } from './packages/dialog-clone-package/dialog-clone-package.component';
 import { OrderListComponent } from './orders/order-list/order-list.component';
+import { DmInterceptor } from './shared/dm.interceptor';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -84,6 +85,11 @@ const routes: Routes = [
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DmInterceptor,
+      multi: true
+    }
   ],
   entryComponents: [
     PriceFormComponent,

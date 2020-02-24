@@ -1,4 +1,5 @@
 import * as config from '../shared/config';
+import { environment } from 'src/environments/environment';
 
 export function formatddmmyyyy(stringDate: string) {
     if (stringDate) {
@@ -54,6 +55,6 @@ export function ddmmyyyytoDate(cadena: string) {
 }
 
 export function getUrlIcon(icon: string) {
-    return config.urlIcons + icon + '.svg';
+    return environment.urlIcons + icon + '.svg';
   }
 

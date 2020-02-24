@@ -50,10 +50,7 @@ export class OrderListComponent implements OnInit {
     this.searching = true;
     this.orderService.getOrders().subscribe(
       x => {
-        // if (x.confirmation) {
           this.dataSource = x;
-          // this.dataSource = this.getDemo();
-        // }
       },
       err => {
         console.log('error: ' + err);
@@ -68,19 +65,4 @@ export class OrderListComponent implements OnInit {
   refresh() {
     this.getOrders();
   }
-  // getDemo(): Order[] {
-  //   const orders = [];
-  //   const order = new Order();
-  //   order.id = '1';
-  //   order.paymentType = 'VISA';
-  //   order.oCip = new Cip();
-  //   order.oCip.description = 'hola cip';
-  //   order.oCip.status = 'cancelado';
-  //   order.oVisa = new Visa();
-  //   order.oVisa.status = 'expirado';
-  //   order.oVisa.description = 'hola visa';
-  //   orders.push(order);
-  //   return orders;
-  // }
-
 }
