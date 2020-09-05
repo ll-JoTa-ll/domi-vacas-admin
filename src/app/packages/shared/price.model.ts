@@ -6,6 +6,8 @@ export class Price {
     hotelHtml: string;
     idHotel: string;
     isFlightHtml: boolean;
+    applyDiscount: boolean;
+    discountPercentage: number;
     flightHtml: string;
     flightItinerary: FlightItinerary[];
     single: number;

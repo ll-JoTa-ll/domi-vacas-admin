@@ -123,6 +123,8 @@ export class PriceFormComponent implements OnInit {
     let child = '';
     let infant = '';
     let stockChild = '';
+    let applyDiscount;
+    let discountPercentage;
     let stockInfant = '';
     let stock = '';
     let isFlightHtml = '1';
@@ -135,6 +137,8 @@ export class PriceFormComponent implements OnInit {
       beginDate = this.data.beginDate;
       // endDate = util.ddmmyyyytoDate(this.data.endDate).toISOString();
       endDate = this.data.endDate;
+      applyDiscount = this.data.applyDiscount;
+      discountPercentage = this.data.discountPercentage;
       isHotelHtml = this.data.isHotelHtml ? '1' : '2';
       single = this.data.single.toString();
       double = this.data.double.toString();
@@ -170,7 +174,9 @@ export class PriceFormComponent implements OnInit {
       // endDate: [{ value: '', disabled: true}, Validators.required],
       beginDate: [beginDate, Validators.required],
       endDate: [endDate, Validators.required],
+      discountPercentage: [discountPercentage, Validators.required],
       isHotelHtml: [isHotelHtml, Validators.required],
+      applyDiscount: [applyDiscount],
       hotelHtml: [hotelHtml],
       idhotel: [idhotel],
       single: [single, [Validators.required, Validators.min(0)]],
@@ -365,6 +371,8 @@ export class PriceFormComponent implements OnInit {
     price.single = parseFloat(this.priceForm.controls.single.value);
     price.double = parseFloat(this.priceForm.controls.double.value);
     price.triple = parseFloat(this.priceForm.controls.triple.value);
+    price.discountPercentage = this.priceForm.controls.discountPercentage.value;
+    price.applyDiscount = this.priceForm.controls.applyDiscount.value;
     price.child = parseFloat(this.priceForm.controls.child.value);
     price.infant = parseFloat(this.priceForm.controls.infant.value);
     price.stock = parseInt(this.priceForm.controls.stock.value);

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as config from '../../shared/config';
 import { Response } from '../../shared/response.model';
 import { Package } from './package.model';
 import { Status } from 'src/app/shared/status.model';
+import { Observable } from 'rxjs';
+
+let httpOptions = {
+  headers: new HttpHeaders()
+};
 
 @Injectable()
 export class PackageService {
+
+  private urlreports: string = 'https://domiruth-uat.azure-api.net/vacation/' + 'Report/SalesB2CReport';
 
     constructor(
         private http: HttpClient
@@ -17,6 +24,13 @@ export class PackageService {
           .set('search', name);
 
         return this.http.get<Response<Package[]>>(config.getPackageListUrl(config.PACKAGE_LIST_METHOD), {params});
+    }
+
+    listServices(): Observable<any> {
+      httpOptions.headers = new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
+      });
+      return this.http.get<any>(`${this.urlreports}`, httpOptions);
     }
 
     get(id: string) {

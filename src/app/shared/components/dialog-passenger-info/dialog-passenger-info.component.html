@@ -1,0 +1,33 @@
+<div *ngFor="let item of data; let i = index;" style="display: inline-grid;"  mat-dialog-content>
+  <br>
+  <p><strong>Pasajero {{i+1}}</strong></p>
+  <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Nombre : {{item.name}}</span>
+  </div>
+  <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Apellido: {{item.lastName}}</span>
+  </div>
+  <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Tipo Documento: {{item.documentType}}</span>
+  </div>
+  <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Numero Documento: {{item.documentNumber}}</span>
+  </div>
+  <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Fecha Nacimiento: {{item.birthDate}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>Type: {{item.type}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>ResidenceCountry: {{item.residenceCountry}}</span>
+  </div>
+  <br>
+</div>

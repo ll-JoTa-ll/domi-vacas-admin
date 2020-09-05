@@ -7,6 +7,7 @@ export const environment = {
   baseUrl: 'https://domiruth-uat.azure-api.net/vacation/',
   urlIcons: 'https://vacationadminuatsa.blob.core.windows.net/icons/',
   subsKey: 'eb85131bc9d94c02840aa6961e7f77e9',
+  urlCharter: 'https://domiruth-uat.azure-api.net/charter/'
 };
 
 /*

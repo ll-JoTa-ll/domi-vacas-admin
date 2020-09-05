@@ -35,11 +35,22 @@ import { LoginComponent } from './security/login/login.component';
 import { DialogClonePackageComponent } from './packages/dialog-clone-package/dialog-clone-package.component';
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { DmInterceptor } from './shared/dm.interceptor';
+import { ReportsComponent } from './reports/reports.component';
+import { ReportsListComponent } from './reports/reports-list/reports-list.component';
+import { DialogHotelInfoComponent } from './shared/components/dialog-hotel-info/dialog-hotel-info.component';
+import { DialogPassengerInfoComponent } from './shared/components/dialog-passenger-info/dialog-passenger-info.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ChartersComponent } from './charters/charters.component';
+import { ChartersListComponent } from './charters/charters-list/charters-list.component';
+import { ChartersDetailComponent } from './charters/charters-detail/charters-detail.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'reports', component: ReportsListComponent },
   { path: 'package/list', component: PackageListComponent },
   { path: 'package/form', component: PackageFormComponent },
+  { path: 'charters', component: ChartersListComponent },
+  { path: 'charterDetail', component: ChartersDetailComponent },
   { path: 'orders', component: OrderListComponent }
 ];
 
@@ -54,7 +65,14 @@ const routes: Routes = [
     DialogNotificationComponent,
     LoginComponent,
     DialogClonePackageComponent,
-    OrderListComponent
+    OrderListComponent,
+    ReportsComponent,
+    ReportsListComponent,
+    DialogHotelInfoComponent,
+    DialogPassengerInfoComponent,
+    ChartersComponent,
+    ChartersListComponent,
+    ChartersDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +80,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatDividerModule,
     MatButtonModule,
+    MatPaginatorModule,
     MatInputModule,
     MatIconModule,
     ReactiveFormsModule,
@@ -96,7 +115,9 @@ const routes: Routes = [
     IncludeFormComponent,
     ItineraryDetailFormComponent,
     DialogNotificationComponent,
-    DialogClonePackageComponent
+    DialogClonePackageComponent,
+    DialogHotelInfoComponent,
+    DialogPassengerInfoComponent
    ],
   bootstrap: [AppComponent]
 })

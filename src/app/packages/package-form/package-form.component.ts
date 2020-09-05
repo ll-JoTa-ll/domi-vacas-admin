@@ -58,7 +58,7 @@ export class PackageFormComponent implements OnInit {
     // , 'hotel'
     , 'simple', 'double', 'triple'
     , 'child', 'stockChild', 'infant'
-    , 'stockInfant', 'stock'
+    , 'stockInfant', 'applyDiscount', 'discountPercentage' , 'stock'
     // , 'flight'
     , 'edit'
   ];
@@ -154,7 +154,7 @@ export class PackageFormComponent implements OnInit {
           this.categories = x.data;
         }
       },
-      err => { 
+      err => {
         console.log('error: ' + err);
         this.loading = false;
       },
@@ -178,7 +178,7 @@ export class PackageFormComponent implements OnInit {
           });
         }
       },
-      err => { 
+      err => {
         console.log('error: ' + err);
         this.loading = false;
       },
@@ -215,7 +215,7 @@ export class PackageFormComponent implements OnInit {
           this.package = x.data;
         }
       },
-      err => { 
+      err => {
         console.log('error: ' + err);
         this.initForm();
         this.loading = false;
@@ -790,6 +790,8 @@ export class PackageFormComponent implements OnInit {
         copyPrice.single = price.single;
         copyPrice.double = price.double;
         copyPrice.triple = price.triple;
+        copyPrice.applyDiscount = price.applyDiscount;
+        copyPrice.discountPercentage = price.discountPercentage;
         copyPrice.child = price.child;
         copyPrice.infant = price.infant;
         copyPrice.stock = price.stock;
@@ -919,7 +921,7 @@ export class PackageFormComponent implements OnInit {
     });
     return copy;
   };
-  
+
   deepCopyObject = obj => {
     let tempObj = {};
     for (let [key, value] of Object.entries(obj)) {

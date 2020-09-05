@@ -1,0 +1,64 @@
+
+<div class="dm-table">
+
+
+  <mat-divider></mat-divider>
+  <br>
+
+  <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
+  <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Titulo </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="citys">
+          <th mat-header-cell *matHeaderCellDef> Ciudades </th>
+          <td mat-cell *matCellDef="let element"> {{element.originCity}} - {{element.destinationCity}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="airline">
+        <th mat-header-cell *matHeaderCellDef> Aerolinea </th>
+        <td mat-cell *matCellDef="let element"> {{element.carrierName}} </td>
+    </ng-container>
+
+      <ng-container matColumnDef="dateDeparture">
+          <th mat-header-cell *matHeaderCellDef> Fecha Salida </th>
+          <td mat-cell *matCellDef="let element"> {{element.departureDateShow}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateDue">
+        <th mat-header-cell *matHeaderCellDef> Fecha Vencimiento </th>
+        <td mat-cell *matCellDef="let element"> {{element.dueDateShow}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gds">
+        <th mat-header-cell *matHeaderCellDef> GDS </th>
+        <td mat-cell *matCellDef="let element"> {{element.gds}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="requiredVisa">
+          <th mat-header-cell *matHeaderCellDef> Requiere Visa </th>
+          <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.requiredVisa">Si</span>
+              <span *ngIf="!element.requiredVisa">No</span>
+          </td>
+      </ng-container>
+
+      <ng-container matColumnDef="copy">
+        <th mat-header-cell *matHeaderCellDef> Ver Detalle </th>
+        <td mat-cell *matCellDef="let element">
+            <div>
+                <button mat-icon-button aria-label="icon-button" (click)="getCharterPassenger(element.charterFlightId,element.title)">
+                    <mat-icon>info</mat-icon>
+                  </button>
+            </div>
+        </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

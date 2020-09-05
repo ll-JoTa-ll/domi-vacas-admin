@@ -127,6 +127,20 @@
                     {{getErrorMessage(priceForm.controls.stock)}}
                 </mat-error>
             </mat-form-field>
+            <br>
+
+            <mat-checkbox class="dm-margin" formControlName="applyDiscount">Apply Discount</mat-checkbox>
+            <br>
+            <mat-form-field appearance="outline" class="dm-form-field-number">
+              <mat-label>DiscountPercentage</mat-label>
+              <input type="number" matInput formControlName="discountPercentage" autocomplete="off">
+              <mat-error *ngIf="isInvalid(priceForm.controls.discountPercentage, true)">
+                  {{getErrorMessage(priceForm.controls.discountPercentage)}}
+              </mat-error>
+          </mat-form-field>
+          <br>
+
+
 
 
             <br>

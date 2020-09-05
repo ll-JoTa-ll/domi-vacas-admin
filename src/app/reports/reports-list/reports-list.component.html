@@ -1,0 +1,66 @@
+<div class="dm-table">
+  <h1>Reportes</h1>
+  <mat-divider></mat-divider>
+  <br>
+  <!-- <mat-divider></mat-divider> -->
+  <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
+  <!-- <div class="dm-table"> -->
+  <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef> Product </th>
+          <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currency">
+        <th mat-header-cell *matHeaderCellDef> Currency </th>
+        <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="payementType">
+        <th mat-header-cell *matHeaderCellDef> PayementType </th>
+        <td mat-cell *matCellDef="let element"> {{element.payementType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hotel">
+        <th mat-header-cell *matHeaderCellDef> Hotel </th>
+        <td  mat-cell *matCellDef="let element"><span class="showPlus" (click)="showDialogFees(element.ohotel)" style="cursor: pointer;" *ngIf="element.ohotel !== null">{{element.ohotel.name}}</span>  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pasajeros">
+        <th mat-header-cell *matHeaderCellDef> Pasajeros </th>
+        <td  mat-cell *matCellDef="let element"><span class="showPlus" (click)="showDialogPassenger(element.lpassengers)" style="cursor: pointer;" *ngIf="element.lpassengers !== null">Ver Pasajeros</span>  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="payementStatus">
+        <th mat-header-cell *matHeaderCellDef> PayementStatus </th>
+        <td mat-cell *matCellDef="let element"> {{element.payementStatus}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="transactionDate">
+        <th mat-header-cell *matHeaderCellDef> TransactionDate </th>
+        <td mat-cell *matCellDef="let element"> {{element.transactionDate | date: 'd/M/yy, h:mm a'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sector">
+        <th mat-header-cell *matHeaderCellDef> Sector </th>
+        <td mat-cell *matCellDef="let element"> {{element.sector}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef> TotalAmount </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <!-- </div> -->
+</div>

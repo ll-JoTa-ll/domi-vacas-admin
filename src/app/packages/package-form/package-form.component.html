@@ -344,6 +344,21 @@
                                 <td mat-cell *matCellDef="let element"> {{element.stockInfant}} </td>
                             </ng-container>
 
+                            <ng-container matColumnDef="applyDiscount">
+                              <th mat-header-cell *matHeaderCellDef> ApplyDiscount </th>
+                              <td mat-cell *matCellDef="let element">
+                                  <span *ngIf="element.applyDiscount">
+                                    Si
+                                  </span>
+                                  <span *ngIf="!element.applyDiscount">No</span>
+                                </td>
+                            </ng-container>
+
+                          <ng-container matColumnDef="discountPercentage">
+                            <th mat-header-cell *matHeaderCellDef> DiscountPercentage </th>
+                            <td mat-cell *matCellDef="let element"> {{element.discountPercentage}} </td>
+                          </ng-container>
+
                             <ng-container matColumnDef="stock">
                                 <th mat-header-cell *matHeaderCellDef> Stock </th>
                                 <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
