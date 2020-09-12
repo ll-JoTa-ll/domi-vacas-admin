@@ -30,6 +30,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { IncludeFormComponent } from './packages/include-form/include-form.component';
 import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/itinerary-detail-form.component';
+import { PartnerClubAdministratorComponent } from './partnerClub/partner-club-administrator/partner-club-administrator.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
     PackageFormComponent,
     PriceFormComponent,
     IncludeFormComponent,
-    ItineraryDetailFormComponent
+    ItineraryDetailFormComponent,
+    PartnerClubAdministratorComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { ItineraryDetailFormComponent } from './packages/itinerary-detail-form/i
     MatNativeDateModule,
     AngularEditorModule,
     MatTooltipModule,
+    MatPaginatorModule,
     RouterModule.forRoot([
       { path: '', component: PackageListComponent },
       { path: 'package/form', component: PackageFormComponent }

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  subsKey: 'eb85131bc9d94c02840aa6961e7f77e9', // uat
+  url_customer: 'https://domiruth-uat.azure-api.net/customer/'
 };
 
 /*
