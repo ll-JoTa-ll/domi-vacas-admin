@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{textTile}}</h2>
+<div style="text-align: center;">
+    <img src="{{img}}" style="width: 114px;"><br>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <h3>{{textSubtitle}}</h3>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div style="width: 20%;margin: 0px 10px;">
+    <button class="dm-button-back btn-wrap" [mat-dialog-close]="false" (click)="home()">Cancelar</button>
+  </div>
+    <button class="dm-button-back1 btn-wrap"  (click)="send()">Continuar</button>
+</mat-dialog-actions>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

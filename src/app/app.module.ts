@@ -36,6 +36,7 @@ import { DialogClonePackageComponent } from './packages/dialog-clone-package/dia
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { DmInterceptor } from './shared/dm.interceptor';
 import { ReportsComponent } from './reports/reports.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReportsListComponent } from './reports/reports-list/reports-list.component';
 import { DialogHotelInfoComponent } from './shared/components/dialog-hotel-info/dialog-hotel-info.component';
 import { DialogPassengerInfoComponent } from './shared/components/dialog-passenger-info/dialog-passenger-info.component';
@@ -43,6 +44,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChartersComponent } from './charters/charters.component';
 import { ChartersListComponent } from './charters/charters-list/charters-list.component';
 import { ChartersDetailComponent } from './charters/charters-detail/charters-detail.component';
+import { PartnerClubAdministratorComponent } from './partnerClub/partner-club-administrator/partner-club-administrator.component';
+import { DialogSendComponent } from './shared/components/dialog-send/dialog-send.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { DialogAdvertenciaComponent } from './shared/components/dialog-advertencia/dialog-advertencia.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -53,6 +58,7 @@ const routes: Routes = [
   { path: 'charterDetail', component: ChartersDetailComponent },
   { path: 'orders', component: OrderListComponent }
 ];
+
 
 @NgModule({
   declarations: [
@@ -72,7 +78,10 @@ const routes: Routes = [
     DialogPassengerInfoComponent,
     ChartersComponent,
     ChartersListComponent,
-    ChartersDetailComponent
+    ChartersDetailComponent,
+    PartnerClubAdministratorComponent,
+    DialogSendComponent,
+    DialogAdvertenciaComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +102,8 @@ const routes: Routes = [
     MatTabsModule,
     MatSelectModule,
     FileUploadModule,
+    NgxSpinnerModule,
+    MatAutocompleteModule,
     MatRadioModule,
     MatDialogModule,
     MatSnackBarModule,
@@ -117,7 +128,9 @@ const routes: Routes = [
     DialogNotificationComponent,
     DialogClonePackageComponent,
     DialogHotelInfoComponent,
-    DialogPassengerInfoComponent
+    DialogPassengerInfoComponent,
+    DialogSendComponent,
+    DialogAdvertenciaComponent
    ],
   bootstrap: [AppComponent]
 })

@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.14",
     "@kolkov/angular-editor": "^1.0.2",
     "file-saver": "^2.0.2",
+    "ngx-spinner": "^10.0.1",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.0-rc.2",
     "rxjs": "~6.4.0",
