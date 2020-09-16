@@ -116,9 +116,6 @@ export class PartnerClubAdministratorComponent implements OnInit {
     }
 
 
-
-
-
     //Servicio con parametros y Header
     getListUsers(param: string){
         this.showDiv = false;

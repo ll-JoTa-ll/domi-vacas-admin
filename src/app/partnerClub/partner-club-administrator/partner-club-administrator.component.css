@@ -70,3 +70,19 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .mat-column-name {
+    width: 200px;
+    text-align: left;
+    justify-content: flex-end;
+}  
+  .mat-column-lastName {
+    width: 200px;
+    text-align: left;
+    justify-content: flex-end;
+}  
+  .mat-column-invitationPartnerClub {
+    width: 150px;
+    text-align: center;
+    justify-content: flex-end;
+}
