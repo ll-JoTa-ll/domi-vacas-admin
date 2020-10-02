@@ -189,7 +189,9 @@ export class PartnerClubAdministratorComponent implements OnInit {
     //fin Servicios <<<
 
     onCompanyChange(val: any,valor1,valor2) {
-      this.spinner.show();
+      this.selection.clear();
+      this.showButton = false;
+      this.spinner.show(); 
       this.textRuc = valor1;
       this.textEmpresa = valor2;
       this.getListUsers(val);
