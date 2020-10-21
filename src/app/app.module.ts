@@ -48,10 +48,15 @@ import { PartnerClubAdministratorComponent } from './partnerClub/partner-club-ad
 import { DialogSendComponent } from './shared/components/dialog-send/dialog-send.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DialogAdvertenciaComponent } from './shared/components/dialog-advertencia/dialog-advertencia.component';
+import { DmStarsComponent } from './shared/components/dm-stars/dm-stars.component';
+import { DialogTableComponent } from './shared/components/dialog-table/dialog-table.component';
+import { ReportsDetailComponent } from './reports/reports-detail/reports-detail.component';
+import { DialogInfoComponent } from './shared/components/dialog-info/dialog-info.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'reports', component: ReportsListComponent },
+  { path: 'reports-detail', component: ReportsDetailComponent },
   { path: 'package/list', component: PackageListComponent },
   { path: 'package/form', component: PackageFormComponent },
   { path: 'charters', component: ChartersListComponent },
@@ -78,10 +83,14 @@ const routes: Routes = [
     DialogPassengerInfoComponent,
     ChartersComponent,
     ChartersListComponent,
+    DmStarsComponent,
     ChartersDetailComponent,
     PartnerClubAdministratorComponent,
     DialogSendComponent,
-    DialogAdvertenciaComponent
+    DialogAdvertenciaComponent,
+    DialogTableComponent,
+    ReportsDetailComponent,
+    DialogInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -102,10 +111,10 @@ const routes: Routes = [
     MatTabsModule,
     MatSelectModule,
     FileUploadModule,
-    NgxSpinnerModule,
     MatAutocompleteModule,
     MatRadioModule,
     MatDialogModule,
+    NgxSpinnerModule,
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -130,7 +139,9 @@ const routes: Routes = [
     DialogHotelInfoComponent,
     DialogPassengerInfoComponent,
     DialogSendComponent,
-    DialogAdvertenciaComponent
+    DialogAdvertenciaComponent,
+    DialogTableComponent,
+    DialogInfoComponent
    ],
   bootstrap: [AppComponent]
 })

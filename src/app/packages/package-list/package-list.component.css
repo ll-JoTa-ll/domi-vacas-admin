@@ -26,5 +26,35 @@ button {
 
 .title {
     display: flex;
-    justify-content: space-between;
+}
+
+.buttons{
+  display: flex;
+  margin-left: 45%;
+}
+
+@media (max-width:822px) {
+  .buttons{
+    display: flex;
+    margin-left: 12%;
+  }
+}
+
+@media (max-width:572px) {
+  .title{
+    display: block;
+  }
+
+  .buttons{
+    display: flex;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width:480px) {
+
+  .buttons{
+    display: block;
+    margin: 0 auto;
+  }
 }

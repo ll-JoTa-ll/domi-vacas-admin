@@ -1,0 +1,104 @@
+<div  class="pag-detail">
+  <div class="title">
+    <h1>Detalles de tu Reserva</h1>
+    <div class="buttons" >
+      <button mat-raised-button class="dm-button" (click)="back()">Retroceder</button>
+    </div>
+
+</div>
+  <div *ngIf="data.oflight != null"  class="container">
+    <section class="product">
+      <div class="articleImg" style="text-align: center;">
+        <img src="assets/images/reports/air.svg" style="width: 45px;">
+      </div>
+      <div class="article">
+        <span class="textVuelo">Vuelo a {{data.oflight.oreservation.finalDestination}}</span><br>
+        <span class="textTransc">Nro. Transaccion: {{data.transactionCode}}</span>
+      </div>
+      <div class="article">
+        <span class="textVuelo">Reserva :</span>
+        <span > {{data.oflight.oreservation.pnr}} {{data.oflight.oreservation.status}}</span>
+      </div>
+      <div class="article" style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="showDialogFees(data.oflight)">Ver Detalle</button>
+      </div>
+    </section>
+    <section class="conTramo">
+      <div *ngFor="let item of data.oflight.litineraries;let index = i;" class="tramo">
+        <span class="textTramo"> {{item.origin}}-{{item.destination}}</span><br>
+        <span class="textTramo">{{item.arrivalDate | date: 'd/M/yy, h:mm a'}}</span><br>
+        <img src="assets/images/flight/airlines/{{item.airlineCode}}.png" style="width: 60px;margin-right: 12px;">
+        <span class="textTramo">{{item.airlineName}}</span>
+      </div>
+    </section>
+  </div>
+
+  <div *ngIf="data.ohotel != null" class="container">
+    <section class="product">
+      <div class="articleImg" style="text-align: center;">
+        <img src="assets/images/reports/hotel.svg" style="width: 45px;">
+      </div>
+      <div class="article">
+        <span class="textVuelo">{{data.ohotel.name}} <dm-stars [stars]="data.ohotel.stars" [size]="16" [margin]="2"></dm-stars> </span><br>
+        <span>Nro. Transaccion: {{data.transactionCode}}
+        </span>
+      </div>
+      <div class="article">
+
+        <span  class="textVuelo">Reserva: </span><span>{{data.ohotel.codeReservationHotel}} {{data.ohotel.typeStatus}}</span><br>
+        <span class="textVuelo">Precio Total: </span><span>{{data.ohotel.totalAmount}}</span>
+      </div>
+      <div class="article" style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="showDialogHotel(data.ohotel)">Ver Detalle</button>
+      </div>
+    </section>
+    <section class="conTramo">
+      <div class="tramo">
+        <span class="textTramo">Entrada: {{data.ohotel.checkIn}} </span><br>
+        <span class="textTramo">{{data.ohotel.oRoom.nights}} noches</span><br>
+        <img src="assets/images/reports/phone.svg" style="width: 20px;margin-right: 12px;">
+        <span class="textTramo">{{data.ohotel.telephoneNumber}}</span>
+      </div>
+      <div class="tramo">
+        <span class="textTramo">Salida: {{data.ohotel.checkOut}} </span><br>
+        <span class="textTramo">Dirección : {{data.ohotel.address}} </span><br>
+       <!--  <img src="assets/images/reports/bed.svg" style="width: 20px;margin-right: 12px;">
+        <span>{{data.ohotel.oRoom.name}}</span> -->
+      </div>
+    </section>
+  </div>
+
+  <div *ngIf="data.opackage != null" class="container">
+    <section class="product">
+      <div class="articleImg" style="text-align: center;">
+        <img src="assets/images/reports/playa.svg" style="width: 55px;">
+      </div>
+      <div class="article">
+        <span class="textVuelo">{{data.opackage.name}} </span><br>
+      </div>
+      <div class="article">
+
+        <span class="textVuelo">Reserva :  {{data.opackage.category}}</span><br>
+        <span class="textVuelo">Sector : {{data.opackage.sector}}</span>
+      </div>
+      <div class="article" style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="showDialogPackage(data.opackage)">Ver Detalle</button>
+      </div>
+
+    </section>
+    <section class="conTramo">
+      <div class="tramo">
+        <span class="textTramo">Fecha ida y vuelta: {{data.opackage.departureDates}} </span><br>
+        <span class="textTramo">{{data.opackage.nights}} noches y {{data.opackage.days}} dias</span><br>
+<!--         <img src="assets/images/reports/phone.svg" style="width: 20px;margin-right: 12px;">
+        <span>{{data.ohotel.telephoneNumber}}</span> -->
+      </div>
+      <div class="tramo">
+        <span class="textTramo">Precio del Paquete : USD {{data.opackage.packagePrice}} </span><br>
+        <span class="textTramo">Preco Total : USD {{data.opackage.totalAmount}} </span><br>
+<!--         <img src="assets/images/reports/phone.svg" style="width: 20px;margin-right: 12px;">
+        <span>{{data.ohotel.telephoneNumber}}</span> -->
+      </div>
+    </section>
+  </div>
+</div>

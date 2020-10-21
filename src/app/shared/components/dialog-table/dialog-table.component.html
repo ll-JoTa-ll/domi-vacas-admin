@@ -1,0 +1,45 @@
+<div *ngFor="let item of data.lpassenger; let i = index;" style="display: inline-grid;margin-left: 20px;" >
+  <br>
+  <p><strong>Pasajero {{i+1}}</strong></p>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>Nombres : {{item.name}} {{item.lastName}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>Fecha Nacimiento: {{item.birthDate}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>Teléfono: {{item.telephoneNumber}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>E-ticket: {{item.ticket}}</span>
+  </div>
+
+  <br>
+</div>
+
+<div *ngIf="data.oregulation != null" style="display: inline-grid;margin-left: 20px;">
+  <br>
+  <p><strong>Cambios y Reembolsos</strong></p>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>{{data.oregulation.exchangeAfter}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>{{data.oregulation.exchangeBefore}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>{{data.oregulation.refundAfter}}</span>
+  </div>
+  <div class="dm-justify">
+    <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+    <span>{{data.oregulation.refundBefore}}</span>
+  </div>
+
+  <br>
+</div>

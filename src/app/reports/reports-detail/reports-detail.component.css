@@ -1,0 +1,87 @@
+
+
+.pag-detail{
+  width: 100%;
+  margin: 0px auto;
+}
+
+.container{
+  background: #eeeeee;
+  width: 80%;
+  height: auto;
+  margin: 0px auto;
+  margin-top: 40px;
+}
+
+.product{
+  width: 95%;
+  background: white;
+  margin: 20px;
+  display: inline-flex;
+  border-radius: 20px;
+}
+
+.article{
+  width: 28%;
+  line-height: 28px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.articleImg{
+  width: 15%;
+  line-height: 28px;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 13px;
+}
+
+.conTramo{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.tramo{
+  float: left;
+  background: white;
+  margin: 16px;
+  height: 130px;
+  line-height: 30px;
+  padding: 14px;
+  width: 29%;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.textVuelo{
+  font-weight: 600;
+}
+
+.textTramo{
+  color: #2e73ca;
+  font-weight: 500;
+}
+
+.textTransc{
+  font-size: 17px;
+  color: #949292;
+}
+
+.title {
+  display: flex;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.buttons{
+margin-top: 3%;
+margin-left: 45%;
+}
+
+.clear{
+  float: none;
+  clear: both;
+}

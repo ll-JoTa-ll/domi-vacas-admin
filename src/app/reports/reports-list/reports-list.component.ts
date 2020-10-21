@@ -5,44 +5,107 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogHotelInfoComponent } from 'src/app/shared/components/dialog-hotel-info/dialog-hotel-info.component';
 import { DialogPassengerInfoComponent } from 'src/app/shared/components/dialog-passenger-info/dialog-passenger-info.component';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DialogTableComponent } from 'src/app/shared/components/dialog-table/dialog-table.component';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
   selector: 'app-reports-list',
   templateUrl: './reports-list.component.html',
   styleUrls: ['./reports-list.component.css'],
-  providers: [PackageService]
+  providers: [PackageService , NgxSpinnerService]
 })
 export class ReportsListComponent implements OnInit {
 
   searching: boolean;
-  displayedColumns: string[] = [ 'product', 'currency' , 'hotel', 'pasajeros',
-                  'payementType', 'payementStatus', 'transactionDate', 'sector', 'totalAmount'];
+  displayedColumns: string[] = ['status', 'transactionStatus' , 'transactionCode' , 'transactionDate',
+                  'travelDates', 'names', 'email' ,
+                  'phone', 'destination', 'totalAmount', 'payementStatus', 'payementType', 'currency', 'order',
+                  'Detalle'];
   dataSource;
+  userId: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(private packageService: PackageService, public dialog: MatDialog) { }
+  constructor(private packageService: PackageService, public dialog: MatDialog, private router: Router,
+              private spinner: NgxSpinnerService, private session: SessionService) { }
 
   ngOnInit() {
-    this.search();
-
+    this.userId = sessionStorage.getItem('userId');
+    if (!this.userId || this.userId === '') {
+      this.router.navigate(['']);
+    } else {
+      this.search();
+    }
   }
 
-  showDialogFees(message: string) {
+  showDialogFees(message: any) {
     const dialogRef = this.dialog.open(DialogHotelInfoComponent, {
-      data: message
+      data: message,
+      height: 'auto',
+      width: '80%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
     });
   }
 
-  showDialogPassenger(message: any[]) {
-    const dialogRef = this.dialog.open(DialogPassengerInfoComponent, {
-      data: message
+  back(){
+    this.router.navigate(['package/list']);
+  }
+
+  showDialogPassenger(message: any) {
+    const dialogRef = this.dialog.open(DialogTableComponent, {
+      data: message,
+      height: 'auto',
+      width: '80%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  detailService(transacionId) {
+    this.spinner.show();
+    this.packageService.listServicesDetail(transacionId).subscribe(
+      x => {
+        const data = x;
+        this.session.setReportDetail(x);
+        this.spinner.hide();
+        /* this.showDialogPassenger(data); */
+        this.router.navigate(['reports-detail']);
+      },
+      err => {
+        console.log('error: ' + err);
+
+      },
+      () => {
+
+      }
+    );
+  }
+
+  detailServicePassenger(transacionId) {
+    this.spinner.show();
+    this.packageService.listServicesDetail(transacionId).subscribe(
+      x => {
+        const data = x;
+        this.spinner.hide();
+        this.showDialogFees(data);
+      },
+      err => {
+        console.log('error: ' + err);
+
+      },
+      () => {
+
+      }
+    );
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 

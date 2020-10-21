@@ -5,6 +5,7 @@ import { Response } from '../../shared/response.model';
 import { Package } from './package.model';
 import { Status } from 'src/app/shared/status.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 let httpOptions = {
   headers: new HttpHeaders()
@@ -13,7 +14,8 @@ let httpOptions = {
 @Injectable()
 export class PackageService {
 
-  private urlreports: string = 'https://domiruth-uat.azure-api.net/vacation/' + 'Report/SalesB2CReport';
+  private urlreports: string = environment.baseUrl + 'Report/SalesB2CReport';
+  private urlDetail: string = environment.baseUrl + 'Report/SalesB2CDetailReport';
 
     constructor(
         private http: HttpClient
@@ -31,6 +33,14 @@ export class PackageService {
         'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
       });
       return this.http.get<any>(`${this.urlreports}`, httpOptions);
+    }
+
+    listServicesDetail(transaction): Observable<any> {
+      httpOptions.headers = new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
+      });
+      const url = `${this.urlDetail}/${transaction}`;
+      return this.http.get<any>(url, httpOptions);
     }
 
     get(id: string) {

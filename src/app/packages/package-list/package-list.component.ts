@@ -41,6 +41,14 @@ export class PackageListComponent implements OnInit {
     }
   }
 
+  partner(){
+    this.router.navigate(['partner-admin']);
+  }
+
+  reports(){
+    this.router.navigate(['reports']);
+  }
+
   search() {
     this.searching = true;
     this.packageService.list(this.name ? this.name : '').subscribe(

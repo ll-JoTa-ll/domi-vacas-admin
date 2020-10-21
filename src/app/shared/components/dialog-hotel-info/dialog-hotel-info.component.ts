@@ -1,5 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-dialog-hotel-info',
@@ -8,11 +10,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DialogHotelInfoComponent implements OnInit {
 
+  dataSource;
+  displayedColumns: string[] = ['name', 'lastName',
+    'documentType', 'documentNumber', 'email', 'birthDate', 'telephoneNumber'];
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(public dialogRef: MatDialogRef<DialogHotelInfoComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 ngOnInit() {
-console.log(JSON.stringify(this.data));
+
 }
 
 onClose() {

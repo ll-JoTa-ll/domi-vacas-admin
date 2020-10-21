@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { DialogAdvertenciaComponent } from 'src/app/shared/components/dialog-advertencia/dialog-advertencia.component';
+import { Router } from '@angular/router';
 
 interface opcionesFiltro {
   value: string;
@@ -59,6 +60,7 @@ export class PartnerClubAdministratorComponent implements OnInit {
   listaIds = [];
   dataSend: any;
   change;
+  userId;
 
   //filtro
   filtros: opcionesFiltro[] = [
@@ -80,16 +82,21 @@ export class PartnerClubAdministratorComponent implements OnInit {
     private enviarInvitacion: PostInvitationPartnerClubService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
+    private router: Router,
     private formBuilder: FormBuilder
       ) { }
 
   ngOnInit() {
-    this.getListCompany();
+    this.userId = sessionStorage.getItem('userId');
+    if (!this.userId || this.userId === '') {
+      this.router.navigate(['']);
+    } else {
+      this.getListCompany();
 
-    this.form = this.formBuilder.group({
-      country: []
-    });
-
+      this.form = this.formBuilder.group({
+        country: []
+      });
+    }
   }
 
   //Servicios >>>
@@ -191,7 +198,7 @@ export class PartnerClubAdministratorComponent implements OnInit {
     onCompanyChange(val: any,valor1,valor2) {
       this.selection.clear();
       this.showButton = false;
-      this.spinner.show(); 
+      this.spinner.show();
       this.textRuc = valor1;
       this.textEmpresa = valor2;
       this.getListUsers(val);
