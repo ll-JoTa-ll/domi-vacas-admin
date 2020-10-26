@@ -12,9 +12,10 @@
   <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
   <!-- <div class="dm-table"> -->
     <mat-form-field>
-      <mat-label>Busqueda</mat-label>
+      <mat-label>Búsqueda por código transacción</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
     </mat-form-field>
+    <img src="assets/images/reports/search.svg" matTooltip='Busqueda por Código de Transacción, Contacto, Fecha de Transacción, Estado de Transacción, Destino Final' style="float: right;width: 45px;">
   <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- <ng-container matColumnDef="id">
@@ -25,18 +26,18 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Estado </th>
       <td mat-cell *matCellDef="let element">
-        <img *ngIf="element.transactionStatus === 'CONFIRMADO' " src="assets/images/reports/verde.svg"
+        <img *ngIf="element.transactionStatus === 'CONFIRMADO' " matTooltip="Confirmado" src="assets/images/reports/verde.svg"
           style="width: 24px">
-        <img *ngIf="element.transactionStatus === 'PENDIENTE' " src="assets/images/reports/amarillo.svg"
+        <img *ngIf="element.transactionStatus === 'PENDIENTE' " matTooltip="Pendiente" src="assets/images/reports/amarillo.svg"
           style="width: 24px">
-        <img *ngIf="element.transactionStatus === 'FALLIDO' " src="assets/images/reports/rojo.svg" style="width: 24px">
+        <img *ngIf="element.transactionStatus === 'FALLIDO' " matTooltip="Fallido" src="assets/images/reports/rojo.svg" style="width: 24px">
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="transactionStatus">
+    <!-- <ng-container matColumnDef="transactionStatus">
       <th mat-header-cell *matHeaderCellDef> Estado Trans. </th>
       <td mat-cell *matCellDef="let element"> {{element.transactionStatus}} </td>
-    </ng-container>
+    </ng-container> -->
 
      <ng-container matColumnDef="transactionCode">
       <th mat-header-cell *matHeaderCellDef> Codigo Trans. </th>
@@ -45,16 +46,16 @@
 
     <ng-container matColumnDef="transactionDate">
       <th mat-header-cell *matHeaderCellDef> Fecha Trans. </th>
-      <td mat-cell *matCellDef="let element"> {{element.transactionDate | date: 'd/M/yy'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.transactionDate}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="travelDates">
+    <!-- <ng-container matColumnDef="travelDates">
       <th mat-header-cell *matHeaderCellDef> Fecha Viaje </th>
       <td mat-cell *matCellDef="let element"> {{element.travelDates}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="names">
-      <th mat-header-cell *matHeaderCellDef> Nombres Contac. </th>
+      <th mat-header-cell *matHeaderCellDef> Contacto </th>
       <td mat-cell *matCellDef="let element"> {{element.ocontact.name}}  {{element.ocontact.lastName}} </td>
     </ng-container>
 
@@ -95,6 +96,11 @@
       <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="adminCharges">
+      <th mat-header-cell *matHeaderCellDef> Cargos </th>
+      <td mat-cell *matCellDef="let element"> {{element.adminCharges}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="payementStatus">
       <th mat-header-cell *matHeaderCellDef> Estado Pago </th>
       <td mat-cell *matCellDef="let element"> {{element.oPayement.payementStatus}} </td>
@@ -103,6 +109,18 @@
     <ng-container matColumnDef="payementType">
       <th mat-header-cell *matHeaderCellDef> Forma Pago </th>
       <td mat-cell *matCellDef="let element"> {{element.oPayement.payementType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="creditCard">
+      <th mat-header-cell *matHeaderCellDef> Nro Tarjeta </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.oPayement.ovisa != null">{{element.oPayement.ovisa.creditCard}}</span>
+         </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payementDate">
+      <th mat-header-cell *matHeaderCellDef> Fecha Pago </th>
+      <td mat-cell *matCellDef="let element"> {{element.oPayement.payementDate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="currency">

@@ -19,9 +19,10 @@ import { SessionService } from 'src/app/shared/services/session.service';
 export class ReportsListComponent implements OnInit {
 
   searching: boolean;
-  displayedColumns: string[] = ['status', 'transactionStatus' , 'transactionCode' , 'transactionDate',
-                  'travelDates', 'names', 'email' ,
-                  'phone', 'destination', 'totalAmount', 'payementStatus', 'payementType', 'currency', 'order',
+  displayedColumns: string[] = ['status' , 'transactionCode' , 'transactionDate',
+                   'names', 'email' ,
+                  'phone', 'destination', 'totalAmount', 'adminCharges', 'payementStatus', 'payementType',
+                  'payementDate','creditCard', 'currency', 'order',
                   'Detalle'];
   dataSource;
   userId: string;
