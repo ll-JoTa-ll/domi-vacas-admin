@@ -167,10 +167,10 @@ export class PartnerClubAdministratorComponent implements OnInit {
       for (const option of this.selection.selected) {
           if (option.invitationPartnerClub === true) {
               this.show = false;
-              this.showDialogAdver(this.dataSend);
+              this.showDialogAdver(this.dataSend);        
               break;
           } else {
-            this.show = true;
+            this.show = true;            
           }
       }
       if (this.show) {
@@ -179,19 +179,21 @@ export class PartnerClubAdministratorComponent implements OnInit {
           result => {
             if (result === true) {
               this.spinner.hide();
-              this.showDialogRedirection(result);
+              this.showDialogRedirection(result);        
             } else {
               this.spinner.hide();
-              this.showDialogRedirection(result);
-            }
+              this.showDialogRedirection(result);        
+            }    
           },
           () => {
-            this.spinner.hide();
+            this.spinner.hide();    
           }
         )
       } else {
         this.spinner.hide();
       }
+      this.selection.clear(); /* CDA */
+      this.showButton = false; /* CDA */
     }
     //fin Servicios <<<
 
@@ -297,4 +299,10 @@ export class PartnerClubAdministratorComponent implements OnInit {
       filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
       this.listUsers.filter = filterValue;
     }
+
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.listUsers.filter = filterValue.trim().toLowerCase();
+    }
+  
 }

@@ -31,7 +31,7 @@ export class DialogSendComponent implements OnInit {
 
   home(){
     this.dialogRef.close();
-    window.location.reload();
-  }
+/*     window.location.reload();
+ */  }
 
 }

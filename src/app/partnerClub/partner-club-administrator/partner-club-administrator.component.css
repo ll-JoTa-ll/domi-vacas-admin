@@ -3,7 +3,7 @@
     padding: 0;
 }
 #contenedor{
-    width: 1200px;
+    width: 1300px;
     height: 1000px;
     background: #fdfdfd;
     margin: 0.5em auto;
@@ -72,7 +72,7 @@
   }
 
   .mat-column-name {
-    width: 200px;
+    width: 180px;
     text-align: left;
     justify-content: flex-end;
 }  
@@ -82,7 +82,25 @@
     justify-content: flex-end;
 }  
   .mat-column-invitationPartnerClub {
-    width: 150px;
+    width: 160px;
     text-align: center;
     justify-content: flex-end;
 }
+
+.pater {
+  letter-spacing: -1px;
+  width: 100%;/*o lo necesario*/
+  margin: auto;
+}
+.pater div {
+  line-height: 0.5;
+  display: inline-block;
+  word-spacing: normal;
+  letter-spacing: normal;
+  white-space: normal;
+  width: 25%;/*El valor necesario*/
+  vertical-align: middle;
+}
+
+
+
