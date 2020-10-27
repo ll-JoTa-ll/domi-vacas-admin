@@ -44,11 +44,23 @@
   align-content: center;
 }
 
+.tramoHotel{
+  float: left;
+  background: white;
+  margin: 16px;
+  height: 140px;
+  line-height: 30px;
+  padding: 14px;
+  width: 29%;
+  text-align: center;
+  border-radius: 20px;
+}
+
 .tramo{
   float: left;
   background: white;
   margin: 16px;
-  height: 130px;
+  height: 300px;
   line-height: 30px;
   padding: 14px;
   width: 29%;
