@@ -21,7 +21,7 @@
         <span class="textVuelo">Precio Total: </span><span>USD {{data.oflight.oreservation.totalAmount}}</span>
       </div>
       <div class="article" style="text-align: center;">
-        <button mat-raised-button color="primary" (click)="showDialogFees(data.oflight)">Ver Detalle</button>
+        <button mat-raised-button color="primary" (click)="showDialogFees(data.oflight)">Ver Pasajeros</button>
       </div>
     </section>
     <section class="conTramo">
@@ -35,6 +35,30 @@
         <span class="textTramo">Aeropuerto Llegada : {{item.airportDestinationName}}</span><br>
         <img *ngIf="item.baggageAllowed !== '' && item.baggageAllowed !== '0PC' " src="assets/images/flight/bagAllowed.svg" matTooltip='Incluye maleta' style="width: 20px;margin: 0px 15px;">
         <img *ngIf="item.baggageAllowed === '' || item.baggageAllowed === '0PC' " src="assets/images/flight/bagNotAllowed.svg" matTooltip='No incluye maleta' style="width: 20px;margin: 0px 15px;">
+      </div>
+    </section>
+    <section *ngIf="data.oflight.oregulation !== null && data.oflight.oregulation !== ''" class="conTramo">
+      <div  class="tramoreg" style="display: inline-grid;margin-left: 20px;">
+        <br>
+        <p><strong>Cambios y Reembolsos</strong></p>
+        <div class="dm-justify">
+          <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+          <span>{{data.oflight.oregulation.exchangeAfter}}</span>
+        </div>
+        <div class="dm-justify">
+          <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+          <span>{{data.oflight.oregulation.exchangeBefore}}</span>
+        </div>
+        <div class="dm-justify">
+          <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+          <span>{{data.oflight.oregulation.refundAfter}}</span>
+        </div>
+        <div class="dm-justify">
+          <img src="assets/images/reports/garrapata.svg" style="width: 24px;padding-right: 10px;">
+          <span>{{data.oflight.oregulation.refundBefore}}</span>
+        </div>
+
+        <br>
       </div>
     </section>
   </div>
@@ -73,6 +97,12 @@
         <span class="textTramo">Habitación: {{data.ohotel.oRoom.name}}</span>
        <!--  <img src="assets/images/reports/bed.svg" style="width: 20px;margin-right: 12px;">
         <span>{{data.ohotel.oRoom.name}}</span> -->
+      </div>
+    </section>
+    <section *ngIf="data.ohotel.cancelationFees" class="conTramo">
+      <div class="tramoHotelReg">
+        <p><strong>Gastos y Cancelaciones</strong></p><br>
+        <span class="textTramo" [innerHTML]="data.ohotel.cancelationFees"></span>
       </div>
     </section>
   </div>

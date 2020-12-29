@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { DialogAdvertenciaComponent } from 'src/app/shared/components/dialog-advertencia/dialog-advertencia.component';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 interface opcionesFiltro {
   value: string;
@@ -61,7 +62,8 @@ export class PartnerClubAdministratorComponent implements OnInit {
   dataSend: any;
   change;
   userId;
-
+  refresh;
+  valorCompany;
   //filtro
   filtros: opcionesFiltro[] = [
     {value: '1', viewValue: 'Todos'},
@@ -83,7 +85,8 @@ export class PartnerClubAdministratorComponent implements OnInit {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sessionService: SessionService
       ) { }
 
   ngOnInit() {
@@ -157,6 +160,12 @@ export class PartnerClubAdministratorComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.validSendUser = result;
+        this.refresh = this.sessionService.getRefreshTable();
+        if(this.refresh === true){
+          this.getListUsers(this.valorCompany);
+          this.showButton = false;
+          this.selection.clear();
+        }
       });
     }
 
@@ -167,10 +176,10 @@ export class PartnerClubAdministratorComponent implements OnInit {
       for (const option of this.selection.selected) {
           if (option.invitationPartnerClub === true) {
               this.show = false;
-              this.showDialogAdver(this.dataSend);        
+              this.showDialogAdver(this.dataSend);
               break;
           } else {
-            this.show = true;            
+            this.show = true;
           }
       }
       if (this.show) {
@@ -178,21 +187,24 @@ export class PartnerClubAdministratorComponent implements OnInit {
         this.enviarInvitacion.enviaInvitacion(this.dataSend).subscribe(
           result => {
             if (result === true) {
+              this.showButton = false;
+              this.selection.clear();
+              this.getListUsers(this.valorCompany);
               this.spinner.hide();
-              this.showDialogRedirection(result);        
+              this.showDialogRedirection(result);
             } else {
               this.spinner.hide();
-              this.showDialogRedirection(result);        
-            }    
+              this.showDialogRedirection(result);
+            }
           },
           () => {
-            this.spinner.hide();    
+            this.spinner.hide();
           }
         )
       } else {
         this.spinner.hide();
       }
-      this.selection.clear(); /* CDA */
+      /* CDA */
       this.showButton = false; /* CDA */
     }
     //fin Servicios <<<
@@ -203,6 +215,7 @@ export class PartnerClubAdministratorComponent implements OnInit {
       this.spinner.show();
       this.textRuc = valor1;
       this.textEmpresa = valor2;
+      this.valorCompany = val;
       this.getListUsers(val);
       }
 
@@ -304,5 +317,5 @@ export class PartnerClubAdministratorComponent implements OnInit {
       const filterValue = (event.target as HTMLInputElement).value;
       this.listUsers.filter = filterValue.trim().toLowerCase();
     }
-  
+
 }

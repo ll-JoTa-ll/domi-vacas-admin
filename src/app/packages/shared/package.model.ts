@@ -9,6 +9,7 @@ export class Package {
     discount: number;
     isActive: boolean;
     isVisible: boolean;
+    isOffline: boolean;
     days: number;
     nights: number;
     idCategory: string;

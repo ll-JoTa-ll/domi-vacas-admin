@@ -50,6 +50,8 @@
                         <mat-checkbox class="dm-margin" formControlName="inShowCase">Ver en vitrina</mat-checkbox>
 
                         <br>
+
+
                         <br>
                         <mat-form-field appearance="outline" class="dm-form-field">
                             <mat-label>Categoria</mat-label>
@@ -82,6 +84,11 @@
                             </mat-error>
                         </mat-form-field>
 
+
+                        <br>
+                        <mat-checkbox class="dm-margin" formControlName="offLine">Paquete Offline</mat-checkbox>
+
+                        <br>
                         <br>
                         <mat-form-field appearance="outline" class="dm-form-field">
                             <mat-label>Notas</mat-label>
@@ -90,6 +97,9 @@
                                 {{getErrorMessage(packageForm.controls.notes)}}
                             </mat-error>
                         </mat-form-field>
+
+                        <br>
+
 
                         <br>
                         <div class="dm-margin">

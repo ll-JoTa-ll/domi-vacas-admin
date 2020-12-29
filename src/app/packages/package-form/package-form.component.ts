@@ -235,6 +235,7 @@ export class PackageFormComponent implements OnInit {
     this.packageForm.controls.nights.setValue(this.package.nights);
     this.packageForm.controls.discount.setValue(this.package.discount);
     this.packageForm.controls.inShowCase.setValue(this.package.isVisible);
+    this.packageForm.controls.offLine.setValue(this.package.isOffline);
     this.packageForm.controls.category.setValue(this.package.idCategory);
     this.packageForm.controls.keyword.setValue(this.package.destiny);
     this.packageForm.controls.notes.setValue(this.package.notes);
@@ -321,6 +322,7 @@ export class PackageFormComponent implements OnInit {
       nights: ['', [Validators.required, Validators.min(1)]],
       discount: [''],
       inShowCase: [''],
+      offLine: [''],
       category: ['', Validators.required],
       keyword: ['', Validators.required],
       notes: [''],
@@ -699,6 +701,7 @@ export class PackageFormComponent implements OnInit {
     pack.discount = 0;
     pack.isActive = false;
     pack.isVisible = this.packageForm.controls.inShowCase.value === '' ? false : this.packageForm.controls.inShowCase.value;
+    pack.isOffline = this.packageForm.controls.offLine.value === '' ? false : this.packageForm.controls.offLine.value;
     pack.days = this.packageForm.controls.days.value;
     pack.nights = this.packageForm.controls.nights.value;
     pack.idCategory = this.packageForm.controls.category.value;

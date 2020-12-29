@@ -52,6 +52,9 @@ import { DmStarsComponent } from './shared/components/dm-stars/dm-stars.componen
 import { DialogTableComponent } from './shared/components/dialog-table/dialog-table.component';
 import { ReportsDetailComponent } from './reports/reports-detail/reports-detail.component';
 import { DialogInfoComponent } from './shared/components/dialog-info/dialog-info.component';
+import { PackageOfflineListComponent } from './packages/package-offline-list/package-offline-list.component';
+import { PackOfflineDetailComponent } from './packages/pack-offline-detail/pack-offline-detail.component';
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,7 +64,9 @@ const routes: Routes = [
   { path: 'package/form', component: PackageFormComponent },
   { path: 'charters', component: ChartersListComponent },
   { path: 'charterDetail', component: ChartersDetailComponent },
-  { path: 'orders', component: OrderListComponent }
+  { path: 'orders', component: OrderListComponent },
+  { path: 'package-offline-list', component: PackageOfflineListComponent },
+  { path: 'package-offline-detail', component: PackOfflineDetailComponent },
 ];
 
 
@@ -90,7 +95,9 @@ const routes: Routes = [
     DialogAdvertenciaComponent,
     DialogTableComponent,
     ReportsDetailComponent,
-    DialogInfoComponent
+    DialogInfoComponent,
+    PackageOfflineListComponent,
+    PackOfflineDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +125,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ToastNotificationsModule,
     AngularEditorModule,
     MatTooltipModule,
     RouterModule.forRoot(routes, { useHash: true }),

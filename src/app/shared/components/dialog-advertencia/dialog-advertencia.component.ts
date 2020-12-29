@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PostInvitationPartnerClubService } from 'src/app/partnerClub/shared/postInvitationPartnerClub.service';
+import { SessionService } from '../../services/session.service';
 import { DialogSendComponent } from '../dialog-send/dialog-send.component';
 
 @Component({
@@ -20,13 +21,14 @@ export class DialogAdvertenciaComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogAdvertenciaComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private router: Router,
               private enviarInvitacion: PostInvitationPartnerClubService, private spinner: NgxSpinnerService,
-              public dialog: MatDialog
+              public dialog: MatDialog,private sessionService: SessionService
 ) { }
 
   ngOnInit() {
   }
 
   home(){
+    this.sessionService.setRefreshTable(false);
     this.dialogRef.close();
   }
 
@@ -47,6 +49,7 @@ export class DialogAdvertenciaComponent implements OnInit {
     this.enviarInvitacion.enviaInvitacion(this.data).subscribe(
       result => {
         if (result === true) {
+          this.sessionService.setRefreshTable(true);
           this.spinner.hide();
           this.dialogRef.close();
           this.showDialogRedirection(result);

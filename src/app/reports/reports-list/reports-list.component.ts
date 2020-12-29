@@ -20,7 +20,7 @@ export class ReportsListComponent implements OnInit {
 
   searching: boolean;
   displayedColumns: string[] = ['status' , 'transactionCode' , 'transactionDate',
-                   'names', 'email' ,
+                   'fullName', 'email' ,
                   'phone', 'destination', 'totalAmount', 'adminCharges', 'payementStatus', 'payementType',
                   'payementDate','creditCard', 'currency', 'order',
                   'Detalle'];

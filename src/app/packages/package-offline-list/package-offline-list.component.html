@@ -1,6 +1,6 @@
 <div class="dm-table">
   <div style="width: 100%;display: flex;">
-    <h1>Reportes</h1>
+    <h1>Paquetes Offline</h1>
     <div class="buttons">
       <button mat-raised-button class="dm-button" (click)="back()">Retroceder</button>
     </div>
@@ -15,7 +15,7 @@
       <mat-label>Búsqueda por código transacción</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
     </mat-form-field>
-    <img src="assets/images/reports/search.svg" matTooltip='Busqueda por Código de Transacción, Contacto, Fecha de Transacción, Estado de Transacción, Destino Final' style="float: right;width: 45px;">
+    <img src="assets/images/reports/search.svg" matTooltip='Busqueda por Código de Transacción, Contacto, Fecha de Transacción, Estado de Transacción, Nombre Paquete' style="float: right;width: 45px;">
   <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- <ng-container matColumnDef="id">
@@ -26,11 +26,11 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Estado </th>
       <td mat-cell *matCellDef="let element">
-        <img *ngIf="element.transactionStatus === 'CONFIRMADO' " matTooltip="Confirmado" src="assets/images/reports/verde.svg"
+        <img *ngIf="element.status === 'CONFIRMADO' " matTooltip="Confirmado" src="assets/images/reports/verde.svg"
           style="width: 24px">
-        <img *ngIf="element.transactionStatus === 'PENDIENTE' " matTooltip="Pendiente" src="assets/images/reports/amarillo.svg"
+        <img *ngIf="element.status === 'PENDIENTE' " matTooltip="Pendiente" src="assets/images/reports/amarillo.svg"
           style="width: 24px">
-        <img *ngIf="element.transactionStatus === 'FALLIDO' " matTooltip="Fallido" src="assets/images/reports/rojo.svg" style="width: 24px">
+        <img *ngIf="element.status === 'FALLIDO' " matTooltip="Fallido" src="assets/images/reports/rojo.svg" style="width: 24px">
       </td>
     </ng-container>
 
@@ -56,17 +56,17 @@
 
     <ng-container matColumnDef="fullName">
       <th mat-header-cell *matHeaderCellDef> Contacto </th>
-      <td mat-cell *matCellDef="let element"> {{element.ocontact.fullName}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.oContact.fullName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Correo </th>
-      <td mat-cell *matCellDef="let element"> {{element.ocontact.email}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.oContact.email}} </td>
     </ng-container>
 
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-      <td mat-cell *matCellDef="let element"> {{element.ocontact.phone}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.oContact.phone}} </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="hotel">
@@ -79,9 +79,9 @@
         <td  mat-cell *matCellDef="let element"><span class="showPlus" (click)="showDialogPassenger(element.lpassengers)" style="cursor: pointer;" *ngIf="element.lpassengers !== null">Ver Pasajeros</span>  </td>
       </ng-container> -->
 
-    <ng-container matColumnDef="destination">
-      <th mat-header-cell *matHeaderCellDef> Destino Final </th>
-      <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+    <ng-container matColumnDef="package">
+      <th mat-header-cell *matHeaderCellDef> Paquete </th>
+      <td mat-cell *matCellDef="let element"> {{element.package}} </td>
     </ng-container>
 
 
@@ -91,49 +91,30 @@
         <td mat-cell *matCellDef="let element"> {{element.sector}} </td>
       </ng-container> -->
 
-    <ng-container matColumnDef="totalAmount">
+    <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef> Monto Total </th>
-      <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="adminCharges">
-      <th mat-header-cell *matHeaderCellDef> Cargos </th>
-      <td mat-cell *matCellDef="let element"> {{element.adminCharges}} </td>
-    </ng-container>
 
     <ng-container matColumnDef="payementStatus">
       <th mat-header-cell *matHeaderCellDef> Estado Pago </th>
-      <td mat-cell *matCellDef="let element"> {{element.oPayement.payementStatus}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.paymentStatus}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="payementType">
+    <ng-container matColumnDef="paymentMethod">
       <th mat-header-cell *matHeaderCellDef> Forma Pago </th>
-      <td mat-cell *matCellDef="let element"> {{element.oPayement.payementType}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="creditCard">
-      <th mat-header-cell *matHeaderCellDef> Nro Tarjeta </th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="element.oPayement.ovisa != null">{{element.oPayement.ovisa.creditCard}}</span>
-         </td>
+      <td mat-cell *matCellDef="let element"> {{element.paymentMethod}} </td>
     </ng-container>
 
     <ng-container matColumnDef="payementDate">
       <th mat-header-cell *matHeaderCellDef> Fecha Pago </th>
-      <td mat-cell *matCellDef="let element"> {{element.oPayement.payementDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.paymentDate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="currency">
       <th mat-header-cell *matHeaderCellDef> Moneda </th>
-      <td mat-cell *matCellDef="let element"> {{element.oPayement.currency}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="order">
-      <th mat-header-cell *matHeaderCellDef> Codigo Pago </th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="element.oPayement.ovisa != null">{{element.oPayement.ovisa.order}}</span>
-        <span *ngIf="element.oPayement.ocip != null">{{element.oPayement.ocip.code}}</span>
-      </td>
+      <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Detalle">
@@ -166,3 +147,4 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
   <p style="color: white"> Loading... </p>
 </ngx-spinner>
+

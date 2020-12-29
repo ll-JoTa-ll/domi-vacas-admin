@@ -16,6 +16,9 @@ export class PackageService {
 
   private urlreports: string = environment.baseUrl + 'Report/SalesB2CReport';
   private urlDetail: string = environment.baseUrl + 'Report/SalesB2CDetailReport';
+  private urlPackages: string = environment.baseUrl + 'Report/GetPackageOfflineList';
+  private urlPackagesDetail: string = environment.baseUrl + 'Report/GetPackageOfflineDetail';
+  private urlPaymentOffline: string = environment.baseUrl + 'Transaction/UpdatePaymentOffline';
 
     constructor(
         private http: HttpClient
@@ -34,6 +37,31 @@ export class PackageService {
       });
       return this.http.get<any>(`${this.urlreports}`, httpOptions);
     }
+
+    listPackagesOffline(): Observable<any> {
+      httpOptions.headers = new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
+      });
+      return this.http.get<any>(`${this.urlPackages}`, httpOptions);
+    }
+
+    packagesOfflineDetail(transaction): Observable<any> {
+      httpOptions.headers = new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
+      });
+      const url = `${this.urlPackagesDetail}/${transaction}`;
+      return this.http.get<any>(url, httpOptions);
+    }
+
+    updatePaymentOffline(transaction): Observable<any> {
+      httpOptions.headers = new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': 'eb85131bc9d94c02840aa6961e7f77e9'
+      });
+      const url = `${this.urlPaymentOffline}/${transaction}`;
+      return this.http.post<any>(url, httpOptions);
+    }
+
+
 
     listServicesDetail(transaction): Observable<any> {
       httpOptions.headers = new HttpHeaders({

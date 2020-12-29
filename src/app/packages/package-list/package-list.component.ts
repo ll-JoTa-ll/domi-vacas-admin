@@ -49,6 +49,10 @@ export class PackageListComponent implements OnInit {
     this.router.navigate(['reports']);
   }
 
+  packagesOffline(){
+    this.router.navigate(['package-offline-list']);
+  }
+
   search() {
     this.searching = true;
     this.packageService.list(this.name ? this.name : '').subscribe(
