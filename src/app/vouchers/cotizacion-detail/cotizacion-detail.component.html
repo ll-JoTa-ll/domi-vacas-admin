@@ -1,0 +1,281 @@
+<div class="dm-table">
+    <h1>Vouchers</h1>
+    <mat-divider></mat-divider>
+   
+    <br>
+
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 10%;">
+            <span>Cotización:</span>
+        </div>
+        <div style="width: 20%;">
+            <div style="border: 2px solid;line-height: 35px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.nroCotizacion}}</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <span>Programa:</span>
+        </div>
+        <div style="width: 20%;">
+            <div style="border: 2px solid;line-height: 35px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.programa}}</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <span>Responsable Compra:</span>
+        </div>
+        <div style="width: 20%;">
+            <div style="border: 2px solid;line-height: 35px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.responsableCompra}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 20%;">
+
+        </div>
+        <div style="width: 80%;">
+            <div style="border: 2px solid;line-height: 35px;text-align: center;">
+                <span style="font-size: x-large;">Listado de Pasajeros</span>
+            </div>
+        </div>
+        <div style="width: 20%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 20%;">
+
+        </div>
+        <div style="width: 80%;">
+            <div style="float: right;">
+                <button mat-raised-button color="primary">Agregar Pasajeros (+)</button>
+            </div>
+        </div>
+        <div style="width: 20%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
+        <div id="coti" style="width: 82%;margin-left: 2%;">
+            <table *ngIf="!searching" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        
+                <ng-container matColumnDef="nombres">
+                    <th mat-header-cell *matHeaderCellDef> Nombres </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="apellidos">
+                    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+                    <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoDocumento">
+                    <th mat-header-cell *matHeaderCellDef> Tipo Doc </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tipoDocumento}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="numeroDocumento">
+                    <th mat-header-cell *matHeaderCellDef> Nro Documento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.numeroDocumento}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="correo">
+                    <th mat-header-cell *matHeaderCellDef> Correo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefono">
+                    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.telefono}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoPax">
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.tipoPax}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaNacimiento">
+                    <th mat-header-cell *matHeaderCellDef> Fecha Nac </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.fechaNacimiento}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                    <th mat-header-cell *matHeaderCellDef> Activo </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.isActive}} </td>
+                </ng-container>
+        
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div style="width: 10%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 20%;">
+
+        </div>
+        <div style="width: 80%;">
+            <div style="border: 2px solid;line-height: 35px;text-align: center;">
+                <span style="font-size: x-large;">Listado de Servicios - Productos</span>
+            </div>
+        </div>
+        <div style="width: 20%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 20%;">
+
+        </div>
+        <div style="width: 80%;">
+            <div style="float: right;">
+                <button mat-raised-button color="primary">Agregar Servicio (+)</button>
+            </div>
+        </div>
+        <div style="width: 20%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <mat-progress-spinner *ngIf="searching" class="dm-center" mode="indeterminate"></mat-progress-spinner>
+        <div id="coti" style="width: 82%;margin-left: 2%;">
+            <table *ngIf="!searching" mat-table [dataSource]="dataServices" class="mat-elevation-z8">
+
+        
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="destino">
+                    <th mat-header-cell *matHeaderCellDef> Destino </th>
+                    <td mat-cell *matCellDef="let element"> {{element.destino}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaInicio">
+                    <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaFin">
+                    <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="precioBase">
+                    <th mat-header-cell *matHeaderCellDef> Precio Base </th>
+                    <td mat-cell *matCellDef="let element"> {{element.precioBase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cargos">
+                    <th mat-header-cell *matHeaderCellDef> Cargos </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.cargos}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="moneda">
+                    <th mat-header-cell *matHeaderCellDef> Moneda </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.moneda}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="detalle">
+                    <th mat-header-cell *matHeaderCellDef> Detalle </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.detalle}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                    <th mat-header-cell *matHeaderCellDef> Activo </th>
+                    <td mat-cell  *matCellDef="let element"> {{element.isActive}} </td>
+                </ng-container>
+        
+        
+                <tr mat-header-row *matHeaderRowDef="displayedService"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedService;"></tr>
+            </table>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div style="width: 10%;">
+
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-left: 30px;">
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">Precio Base:</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecioBase}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="filaFlex" style="margin-left: 30px;">
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">Cargos:</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecioCargos}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="filaFlex" style="margin-left: 30px;">
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">Precio Total:</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecio}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="filaFlex" style="margin-left: 30px;">
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">Moneda:</span>
+            </div>
+        </div>
+        <div style="width: 10%;">
+            <div style="border: 2px solid;line-height: 25px;text-align: center;">
+                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.moneda}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 20%;">
+
+        </div>
+        <div style="width: 80%;text-align: center;">
+            <div>
+                <button mat-raised-button color="primary">Guardar Cambios</button>
+            </div>
+        </div>
+        <div style="width: 20%;">
+
+        </div>
+    </div>
+   
+   
+</div>
+
+

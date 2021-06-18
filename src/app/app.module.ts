@@ -52,6 +52,9 @@ import { DmStarsComponent } from './shared/components/dm-stars/dm-stars.componen
 import { DialogTableComponent } from './shared/components/dialog-table/dialog-table.component';
 import { ReportsDetailComponent } from './reports/reports-detail/reports-detail.component';
 import { DialogInfoComponent } from './shared/components/dialog-info/dialog-info.component';
+import { VouchersComponent } from './vouchers/vouchers.component';
+import { CotizacionDetailComponent } from './vouchers/cotizacion-detail/cotizacion-detail.component';
+import { VouchersListComponent } from './vouchers/vouchers-list/vouchers-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,7 +64,9 @@ const routes: Routes = [
   { path: 'package/form', component: PackageFormComponent },
   { path: 'charters', component: ChartersListComponent },
   { path: 'charterDetail', component: ChartersDetailComponent },
-  { path: 'orders', component: OrderListComponent }
+  { path: 'orders', component: OrderListComponent },
+  { path: 'voucher-list', component: VouchersListComponent },
+  { path: 'voucher-detail', component: CotizacionDetailComponent }
 ];
 
 
@@ -90,7 +95,10 @@ const routes: Routes = [
     DialogAdvertenciaComponent,
     DialogTableComponent,
     ReportsDetailComponent,
-    DialogInfoComponent
+    DialogInfoComponent,
+    VouchersComponent,
+    CotizacionDetailComponent,
+    VouchersListComponent
   ],
   imports: [
     BrowserModule,

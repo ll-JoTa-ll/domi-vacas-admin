@@ -45,6 +45,10 @@ export class PackageListComponent implements OnInit {
     this.router.navigate(['partner-admin']);
   }
 
+  voucher(){
+    this.router.navigate(['voucher-list']);
+  }
+
   reports(){
     this.router.navigate(['reports']);
   }
