@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>Agregar Voucher</h2>
+<div style="text-align: center;">
+    <img src="{{img}}" style="width: 114px;"><br>
+</div>
+
+
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="bookingForm">
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput formControlName="titulo" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Tipo</mat-label>
+                    <input matInput formControlName="tipo" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="filaFlex">
+            <div class="mitadFila">
+
+                <input (change)="voucherFIle($event)" class="input-file" id="voucherFile" type="file"
+                    accept="">
+                <label tabindex="0" for="voucherFile" class="input-file-trigger">Seleccione su Archivo</label>
+
+            </div>
+            <div class="mitadFila">
+                <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+            </div>
+        </div>
+
+        
+
+
+    </form>
+
+    <div class="fila">
+        <div class="filaFlex box-shadow">
+          <div class="apc-text-header"  style="width: 20% !important;">Titulo</div>
+          <div class="apc-text-21" style="width: 20% !important;">Tipo</div>
+          <div class="apc-text-21" style="width: 20% !important;">Archivo</div>
+          <div class="apc-text-header"  style="width: 20% !important;">Activo</div>
+          <div class="apc-text-header1"  style="width: 20% !important;">Acciones</div>
+        </div>
+      </div>
+  
+      <div class="fila" *ngFor="let pasajero of dataSource;let i = index">
+        <div class="filaFlex box-shadow">
+            <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.titulo}}</div>
+            <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.tipo}}</div>
+            <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.name}}</div>
+          <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.isActive}}</div>
+          <div class="m-0 p-0 text-center apc-text-21" style="width: 20% !important;">Actualizar</div>
+        </div>
+        </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div style="width: 20%;margin: 0px 10px;">
+        <button class="dm-button-back btn-wrap" [mat-dialog-close]="null">Cancelar</button>
+    </div>
+    <button class="dm-button-back1 btn-wrap" (click)="addVoucher()">Añadir</button>
+    <button class="dm-button-back2 btn-wrap" [mat-dialog-close]="this.dataSource" >Finalizar</button>
+</mat-dialog-actions>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->

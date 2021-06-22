@@ -4,33 +4,40 @@
    
     <br>
 
+    <form [formGroup]="bookingForm">
+
+   
+
 
     <div class="filaFlex" style="margin-top: 20px;">
-        <div style="width: 7%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+        <div style="width: 7%;line-height: 40px;margin-left: 15px;">
             <span>Cotización:</span>
         </div>
-        <div style="width: 15%;margin-top: 35px">
-            <div style="border: 2px solid;line-height: 35px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.nroCotizacion}}</span>
-            </div>
+        <div style="width: 15%;">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Cotización</mat-label>
+                <input matInput formControlName="nroCotizacion" autocomplete="off">
+            </mat-form-field>
         </div>
-        <div style="width: 7%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+        <div style="width: 7%;line-height: 40px;margin-left: 15px;">
             <span>Programa:</span>
         </div>
-        <div style="width: 17%;margin-top: 35px">
-            <div style="border: 2px solid;line-height: 35px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.programa}}</span>
-            </div>
+        <div style="width: 17%;">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Programa</mat-label>
+                <input matInput formControlName="programa" autocomplete="off">
+            </mat-form-field>
         </div>
-        <div style="width: 10%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+        <div style="width: 10%;line-height: 40px;margin-left: 15px;">
             <span>Responsable Compra:</span>
         </div>
-        <div style="width: 15%;margin-top: 35px">
-            <div style="border: 2px solid;line-height: 35px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.responsableCompra}}</span>
-            </div>
+        <div style="width: 15%;">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Responsable</mat-label>
+                <input matInput formControlName="responsable" autocomplete="off">
+            </mat-form-field>
         </div>
-        <div style="width: 5%;margin-top: 35px"></div>
+        <div style="width: 5%;"></div>
 
         <div style="width: 15%;">
             <form [formGroup]="bookingForm">
@@ -231,52 +238,42 @@
         </div>
     </div>
 
-    <div class="filaFlex" style="margin-left: 30px;">
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">Precio Base:</span>
-            </div>
+    <div class="filaFlex" style="margin-top: 20px;">
+        <div style="width: 7%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+            <span>Precio Base:</span>
         </div>
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecioBase}}</span>
-            </div>
+        <div style="width: 15%;margin-top: 35px">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Precio Base</mat-label>
+                <input matInput formControlName="precioBase" autocomplete="off">
+            </mat-form-field>
         </div>
-    </div>
-    <div class="filaFlex" style="margin-left: 30px;">
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">Cargos:</span>
-            </div>
+        <div style="width: 7%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+            <span>Cargos:</span>
         </div>
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecioCargos}}</span>
-            </div>
+        <div style="width: 17%;margin-top: 35px">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Cargos</mat-label>
+                <input matInput formControlName="cargos" autocomplete="off">
+            </mat-form-field>
         </div>
-    </div>
-    <div class="filaFlex" style="margin-left: 30px;">
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">Precio Total:</span>
-            </div>
+        <div style="width: 10%;line-height: 40px;margin-left: 15px;margin-top: 35px">
+            <span>Precio Total:</span>
         </div>
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.totalPrecio}}</span>
-            </div>
+        <div style="width: 15%;margin-top: 35px">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Precio Total</mat-label>
+                <input matInput formControlName="precioTotal" autocomplete="off">
+            </mat-form-field>
         </div>
-    </div>
-    <div class="filaFlex" style="margin-left: 30px;">
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">Moneda:</span>
-            </div>
-        </div>
-        <div style="width: 10%;">
-            <div style="border: 2px solid;line-height: 25px;text-align: center;">
-                <span style="font-size: x-large;">{{dataCoti.ocotizacionesPrecio.moneda}}</span>
-            </div>
+        <div style="width: 5%;margin-top: 35px"><span>Moneda:</span></div>
+
+        <div style="width: 15%;">
+            <mat-form-field appearance="outline" class="dm-form-field">
+                <mat-label>Moneda</mat-label>
+                <input matInput formControlName="moneda" autocomplete="off">
+            </mat-form-field>
+            
         </div>
     </div>
 
@@ -294,7 +291,7 @@
         </div>
     </div>
    
-   
+</form>
 </div>
 
 

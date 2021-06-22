@@ -1,0 +1,100 @@
+<h2 mat-dialog-title>Agregar Pasajero</h2>
+<div style="text-align: center;">
+    <img src="{{img}}" style="width: 114px;"><br>
+</div>
+
+
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="bookingForm">
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Tipo</mat-label>
+                    <input matInput formControlName="tipo" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Destino</mat-label>
+                    <input matInput formControlName="destino" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="dpInicio" formControlName="fechaInicio" autocomplete="off" readonly="true">
+                                                <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
+                                                <mat-datepicker #dpInicio startView="multi-year" disabled="false"></mat-datepicker>
+                    <input matInput formControlName="fechaInicio" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="dpFin" formControlName="fechaFin" autocomplete="off" readonly="true">
+                                                <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
+                                                <mat-datepicker #dpFin startView="multi-year" disabled="false"></mat-datepicker>
+                    <input matInput formControlName="fechaFin" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Precio Base</mat-label>
+                    <input matInput formControlName="precioBase" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Cargos</mat-label>
+                    <input matInput formControlName="cargos" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Tipo Documento</mat-label>
+                    <mat-select formControlName="moneda">
+                        <mat-option *ngFor="let type of lCurrency" [value]="type.currencyCode">
+                            {{type.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <div class="mitadFila">
+                    <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+                </div>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput formControlName="detalle" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+    
+
+
+</mat-dialog-content>
+<mat-dialog-actions >
+  <div style="width: 20%;margin: 0px 10px;">
+    <button class="dm-button-back btn-wrap" [mat-dialog-close]="null" >Cancelar</button>
+  </div>
+    <button class="dm-button-back1 btn-wrap"  [mat-dialog-close]="this.bookingForm">Continuar</button>
+</mat-dialog-actions>
+
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->

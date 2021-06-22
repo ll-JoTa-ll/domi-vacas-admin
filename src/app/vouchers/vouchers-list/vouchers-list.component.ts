@@ -45,12 +45,27 @@ export class VouchersListComponent implements OnInit {
     
   }
 
-  getCotizacion(valor){
+  addCoti(){
+    this.sessionService.setInsertUpdate(true);
+    this.router.navigate(['voucher-new']);
+  }
+
+  getCotizacion(valor,setBool){
+
+    this.sessionService.setInsertUpdate(setBool);
+    this.spinner.show();
+   
     console.log(valor);
     this.service.GetCotizacion(valor).subscribe(
       x => {
-        this.sessionService.setCotizacionDetail(x);
-        this.router.navigate(['voucher-detail']);
+        if(x === null){
+
+          this.spinner.hide();
+        } else {
+          this.sessionService.setCotizacionDetail(x);
+          this.router.navigate(['voucher-detail']);
+        }
+        
       }
     )
   }

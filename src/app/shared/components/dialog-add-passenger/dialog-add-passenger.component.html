@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Agregar Pasajero</h2>
+<div style="text-align: center;">
+    <img src="{{img}}" style="width: 114px;"><br>
+</div>
+
+
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="bookingForm">
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput formControlName="nombre" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput formControlName="apellidos" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Tipo Documento</mat-label>
+                    <mat-select formControlName="tipoDoc">
+                        <mat-option *ngFor="let type of lDocument" [value]="type.name">
+                            {{type.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Numero Documento</mat-label>
+                    <input matInput formControlName="numeroDoc" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Correo</mat-label>
+                    <input matInput formControlName="correo" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Tipo Pasajero</mat-label>
+                    <mat-select formControlName="tipoPas">
+                        <mat-option *ngFor="let type of ltypePassenger" [value]="type.value">
+                            {{type.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                 
+                </mat-form-field>
+            </div>
+            <div class="mitadFila">
+                <mat-form-field appearance="outline" class="dm-form-field">
+                    <mat-label>Fecha Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="dpDeparture" formControlName="fechaNac" autocomplete="off" readonly="true">
+                                                <mat-datepicker-toggle matSuffix [for]="dpDeparture"></mat-datepicker-toggle>
+                                                <mat-datepicker #dpDeparture startView="multi-year" disabled="false"></mat-datepicker>
+                    <input matInput formControlName="fechaNac" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="filaFlex">
+            <div class="mitadFila">
+                <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+            </div>
+        </div>
+
+        <span *ngIf="Error" style="color: red;">Todos los campos son obligatorios.</span>
+
+    </form>
+    
+
+
+</mat-dialog-content>
+<mat-dialog-actions >
+  <div style="width: 20%;margin: 0px 10px;">
+    <button class="dm-button-back btn-wrap" [mat-dialog-close]="null">Cancelar</button>
+  </div>
+    <button class="dm-button-back1 btn-wrap"  [mat-dialog-close]="this.bookingForm">Finalizar</button>
+  
+        <button class="dm-button-back2 btn-wrap" (click)="valid()">Añadir Voucher</button>
+     
+</mat-dialog-actions>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->

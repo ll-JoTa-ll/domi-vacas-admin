@@ -1,0 +1,68 @@
+.dm-button-back {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    opacity: 1;
+    font: normal normal bold 15px/12px Roboto;
+    letter-spacing: 0;
+    color: #E82D56;
+    opacity: 1;
+    border: 2px solid;
+    width: 100%;
+    cursor: pointer;
+    height: 44px;
+  }
+  
+  .dm-button-back1 {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    opacity: 1;
+    font: normal normal bold 15px/12px Roboto;
+    letter-spacing: 0;
+    color: #04cc7f;
+    opacity: 1;
+    border: 2px solid;
+    width: 20%;
+    cursor: pointer;
+    height: 44px;
+  }
+
+  .dm-button-back2 {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    opacity: 1;
+    font: normal normal bold 15px/12px Roboto;
+    letter-spacing: 0;
+    color: #676161;
+    opacity: 1;
+    border: 2px solid;
+    width: 20%;
+    cursor: pointer;
+    height: 44px;
+  }
+
+.fila {
+    width: 100%;
+}
+
+.filaFlex {
+    width: 100%;
+    display: flex;
+}
+
+.mitadFila {
+    width: 50%;
+}
+  
+
+
+
+.example-margin {
+    margin: 0 10px;
+  }
+
+table {
+    width: 100%;
+    margin-left: 10pxs;
+}
+  
+  

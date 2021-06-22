@@ -1,9 +1,6 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DialogAddPassengerComponent } from 'src/app/shared/components/dialog-add-passenger/dialog-add-passenger.component';
@@ -11,33 +8,26 @@ import { DialogAddServiceComponent } from 'src/app/shared/components/dialog-add-
 import { SessionService } from '../shared/session.service';
 import { VoucherService } from '../shared/voucherService.model';
 
+
 @Component({
-  selector: 'app-cotizacion-detail',
-  templateUrl: './cotizacion-detail.component.html',
-  styleUrls: ['./cotizacion-detail.component.css'],
-  providers: [DialogAddPassengerComponent, NgxSpinnerService]
+  selector: 'app-cotizacion-new',
+  templateUrl: './cotizacion-new.component.html',
+  styleUrls: ['./cotizacion-new.component.css'],
+  providers: [NgxSpinnerService]
 })
-export class CotizacionDetailComponent implements OnInit {
+export class CotizacionNewComponent implements OnInit {
 
-
-  dataCoti;
-  bookingForm: FormGroup;
-  dataSource;
-  dataServices;
   boolCoti = true;
   boolService = true;
+  bookingForm: FormGroup;
+  dataSource = [];
+  dataServices = [];
   displayedService: string[] = ['tipo', 'destino', 'fechaInicio', 'fechaFin', 'precioBase', 'cargos', 'moneda', 'detalle', 'isActive'];
   displayedColumns: string[] = ['nombres', 'apellidos', 'tipoDocumento', 'numeroDocumento', 'correo', 'telefono', 'tipoPax', 'fechaNacimiento', 'isActive','edit'];
-  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
-  @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private fb: FormBuilder,private spinner: NgxSpinnerService ,public dialog: MatDialog, private sessionService: SessionService,
-    private voucherService: VoucherService, private route : Router) { }
+  constructor(private route: Router,private fb: FormBuilder,private voucherService: VoucherService, private spinner: NgxSpinnerService,public dialog: MatDialog,private sessionService: SessionService) { }
 
   ngOnInit() {
     this.initForm();
-    this.dataCoti = this.sessionService.getCotizacionDetail();
-    this.dataSource = this.dataCoti.lcotizacionesPasajeros;
-    this.dataServices = this.dataCoti.lcotizacionesServicios;
   }
 
   showDialogPassenger() {
@@ -60,43 +50,22 @@ export class CotizacionDetailComponent implements OnInit {
 
   }
 
-  showDialogPassengerEdit(valor) {
-    this.boolCoti = false;
-    const dialogRef = this.dialog.open(DialogAddPassengerComponent, {
-      data: valor,
+  showDialogService() {
+    this.boolService = false;
+    const dialogRef = this.dialog.open(DialogAddServiceComponent, {
+      data: null,
       height: 'auto',
       width: 'auto',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result != null && result != undefined) {
-        this.dataSource.forEach(element => {
-          if (element.cotizacionesPasajeroId === valor.cotizacionesPasajeroId) {
-            element.apellidos = result.value.apellidos;
-            element.correo = result.value.correo;
-            element.isActive = result.value.activo;
-            element.fechaNacimiento = result.value.fechaNac.toISOString();
-            element.lpasajerosVouchers = result.value.lvoucher;
-            element.nombres = result.value.nombre;
-            element.numeroDocumento = result.value.numeroDoc;
-            element.telefono = result.value.telefono;
-            element.tipoDocumento = result.value.tipoDoc;
-            element.tipoPax = result.value.tipoPas;
-          }
-      });
-      this.boolCoti = true;
+        this.anadirServicio(result);
       } else {
-        this.boolCoti = true;
+        this.boolService = true;
       }
-      
     });
-
-
   }
-
-
- 
 
   anadirServicio(data) {
     let activo;
@@ -116,8 +85,7 @@ export class CotizacionDetailComponent implements OnInit {
       isActive: activo,
       moneda: data.value.moneda,
       precioBase: parseFloat(data.value.precioBase),
-      tipo: data.value.tipo,
-      serviciosId: data.value.serviciosId
+      tipo: data.value.tipo
     }
     this.dataServices.push(pass);
     this.boolService = true;
@@ -160,26 +128,19 @@ export class CotizacionDetailComponent implements OnInit {
     this.boolCoti = true;
   }
 
-  initForm() {
-
-    this.bookingForm = this.fb.group({
-      fechaCre: new FormControl('', Validators.required),
-    });
-  }
-
   saveData() {
     this.spinner.show();
     let insert = this.sessionService.getInsertUpdate();
     const data = new FormData();
     data.append('IsInsert', insert);
-    data.append('NroCotizacion', this.dataCoti.nroCotizacion);
-    data.append('CorrelativoCotizacion', this.dataCoti.correlativoCotizacion);
-    data.append('Programa', this.dataCoti.programa);
-    data.append('Tarjeta', this.dataCoti.tarjeta);
-    data.append('FechaCotizacion', this.bookingForm.value.fechaCre.toISOString());
+    data.append('NroCotizacion', this.bookingForm.value.nroCotizacion);
+    data.append('CorrelativoCotizacion', '');
+    data.append('Programa', this.bookingForm.value.programa);
+    data.append('Tarjeta', '');
+    data.append('FechaCotizacion', this.bookingForm.value.fechaCre);
     data.append('CotizacionCreada', 'false');
-    data.append('ResponsableCompra', this.dataCoti.responsableCompra);
-    data.append('IsActive', this.dataCoti.isActive);
+    data.append('ResponsableCompra', this.bookingForm.value.responsable);
+    data.append('IsActive', 'true');
     for (let index = 0; index < this.dataSource.length; index++) {
       const element = this.dataSource[index];
       let CotizacionesPasajeroId = 'LcotizacionesPasajeros[' + index + '].CotizacionesPasajeroId';
@@ -192,7 +153,7 @@ export class CotizacionDetailComponent implements OnInit {
       let TipoPax = 'LcotizacionesPasajeros[' + index + '].TipoPax';
       let FechaNacimiento = 'LcotizacionesPasajeros[' + index + '].FechaNacimiento';
       let IsActive = 'LcotizacionesPasajeros[' + index + '].IsActive';
-      data.append(CotizacionesPasajeroId, element.cotizacionesPasajeroId);
+      data.append(CotizacionesPasajeroId, '');
       data.append(Nombres, element.nombres);
       data.append(Apellidos, element.apellidos);
       data.append(TipoDocumento, element.tipoDocumento);
@@ -255,25 +216,18 @@ export class CotizacionDetailComponent implements OnInit {
     )
   }
 
+  initForm() {
 
-
-  showDialogService() {
-    this.boolService = false;
-    const dialogRef = this.dialog.open(DialogAddServiceComponent, {
-      data: null,
-      height: 'auto',
-      width: 'auto',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null && result != undefined) {
-        this.anadirServicio(result);
-      } else {
-        this.boolService = true;
-      }
+    this.bookingForm = this.fb.group({
+      nroCotizacion: new FormControl('', Validators.required),
+      programa: new FormControl('', Validators.required),
+      responsable: new FormControl('', Validators.required),
+      precioBase: new FormControl('', Validators.required),
+      cargos: new FormControl('', Validators.required),
+      precioTotal: new FormControl('', Validators.required),
+      moneda: new FormControl('', Validators.required),
+      fechaCre: new FormControl('', Validators.required)
     });
   }
-
-
 
 }

@@ -55,6 +55,10 @@ import { DialogInfoComponent } from './shared/components/dialog-info/dialog-info
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { CotizacionDetailComponent } from './vouchers/cotizacion-detail/cotizacion-detail.component';
 import { VouchersListComponent } from './vouchers/vouchers-list/vouchers-list.component';
+import { DialogAddPassengerComponent } from './shared/components/dialog-add-passenger/dialog-add-passenger.component';
+import { DialogAddServiceComponent } from './shared/components/dialog-add-service/dialog-add-service.component';
+import { DialogAddVoucherComponent } from './shared/components/dialog-add-voucher/dialog-add-voucher.component';
+import { CotizacionNewComponent } from './vouchers/cotizacion-new/cotizacion-new.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -66,7 +70,8 @@ const routes: Routes = [
   { path: 'charterDetail', component: ChartersDetailComponent },
   { path: 'orders', component: OrderListComponent },
   { path: 'voucher-list', component: VouchersListComponent },
-  { path: 'voucher-detail', component: CotizacionDetailComponent }
+  { path: 'voucher-detail', component: CotizacionDetailComponent },
+  { path: 'voucher-new', component: CotizacionNewComponent }
 ];
 
 
@@ -98,7 +103,11 @@ const routes: Routes = [
     DialogInfoComponent,
     VouchersComponent,
     CotizacionDetailComponent,
-    VouchersListComponent
+    VouchersListComponent,
+    DialogAddPassengerComponent,
+    DialogAddServiceComponent,
+    DialogAddVoucherComponent,
+    CotizacionNewComponent
   ],
   imports: [
     BrowserModule,
@@ -149,7 +158,10 @@ const routes: Routes = [
     DialogSendComponent,
     DialogAdvertenciaComponent,
     DialogTableComponent,
-    DialogInfoComponent
+    DialogInfoComponent,
+    DialogAddPassengerComponent,
+    DialogAddServiceComponent,
+    DialogAddVoucherComponent
    ],
   bootstrap: [AppComponent]
 })

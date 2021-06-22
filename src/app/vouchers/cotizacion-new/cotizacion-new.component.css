@@ -1,0 +1,31 @@
+.fila{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.filaFlex{
+    width: 100%;
+    display: flex;
+}
+
+.mitad{
+    width: 50%;
+}
+
+.tercio{
+    width: 30%;
+}
+
+.example-margin {
+    margin: 0 10px;
+  }
+
+table {
+    width: 100%;
+    margin-left: 10pxs;
+}
+
+.dm-form-field {
+    width: 200px;
+    margin: 8px;
+  }
