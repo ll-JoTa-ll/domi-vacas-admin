@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Agregar Pasajero</h2>
+<h2 mat-dialog-title>Agregar Servicio</h2>
 <div style="text-align: center;">
-    <img src="{{img}}" style="width: 114px;"><br>
+    <!-- <img src="{{img}}" style="width: 114px;"><br> -->
 </div>
 
 
@@ -61,7 +61,7 @@
         <div class="filaFlex">
             <div class="mitadFila">
                 <mat-form-field appearance="outline" class="dm-form-field">
-                    <mat-label>Tipo Documento</mat-label>
+                    <mat-label>Tipo de Moneda</mat-label>
                     <mat-select formControlName="moneda">
                         <mat-option *ngFor="let type of lCurrency" [value]="type.currencyCode">
                             {{type.description}}
@@ -79,8 +79,13 @@
         <div class="filaFlex">
             <div class="mitadFila">
                 <mat-form-field appearance="outline" class="dm-form-field">
-                    <mat-label>Detalle</mat-label>
-                    <input matInput formControlName="detalle" autocomplete="off">
+                    <!-- <mat-label>Detalle</mat-label>
+                    <input matInput formControlName="detalle" autocomplete="off"> -->
+                    <textarea matInput 
+                    placeholder="Detalle" 
+                    formControlName="detalle" 
+                    (change)="onCommentChange()">
+                 </textarea>
                 </mat-form-field>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DialogAddPassengerComponent } from 'src/app/shared/components/dialog-add-passenger/dialog-add-passenger.component';
@@ -21,12 +22,14 @@ export class CotizacionNewComponent implements OnInit {
   boolService = true;
   bookingForm: FormGroup;
   dataSource = [];
+  dataUser;
   dataServices = [];
   displayedService: string[] = ['tipo', 'destino', 'fechaInicio', 'fechaFin', 'precioBase', 'cargos', 'moneda', 'detalle', 'isActive'];
   displayedColumns: string[] = ['nombres', 'apellidos', 'tipoDocumento', 'numeroDocumento', 'correo', 'telefono', 'tipoPax', 'fechaNacimiento', 'isActive','edit'];
-  constructor(private route: Router,private fb: FormBuilder,private voucherService: VoucherService, private spinner: NgxSpinnerService,public dialog: MatDialog,private sessionService: SessionService) { }
+  constructor(private _snackBar: MatSnackBar,private route: Router,private fb: FormBuilder,private voucherService: VoucherService, private spinner: NgxSpinnerService,public dialog: MatDialog,private sessionService: SessionService) { }
 
   ngOnInit() {
+    this.dataUser = this.sessionService.getUser();
     this.initForm();
   }
 
@@ -77,6 +80,7 @@ export class CotizacionNewComponent implements OnInit {
     let fechaIni = data.value.fechaInicio.toISOString();
     let fechaFi = data.value.fechaFin.toISOString();
     const pass = {
+      serviciosId: data.value.serviciosId,
       cargos: parseFloat(data.value.cargos),
       destino: data.value.destino,
       detalle: data.value.detalle,
@@ -128,13 +132,51 @@ export class CotizacionNewComponent implements OnInit {
     this.boolCoti = true;
   }
 
+  showDialogPassengerEdit(valor) {
+    this.boolCoti = false;
+    const dialogRef = this.dialog.open(DialogAddPassengerComponent, {
+      data: valor,
+      height: 'auto',
+      width: 'auto',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result != null && result != undefined) {
+        this.dataSource.forEach(element => {
+          if (element.cotizacionesPasajeroId === valor.cotizacionesPasajeroId) {
+            element.apellidos = result.value.apellidos;
+            element.correo = result.value.correo;
+            element.isActive = result.value.activo;
+            element.fechaNacimiento = result.value.fechaNac.toISOString();
+            element.lpasajerosVouchers = result.value.lvoucher;
+            element.nombres = result.value.nombre;
+            element.numeroDocumento = result.value.numeroDoc;
+            element.telefono = result.value.telefono;
+            element.tipoDocumento = result.value.tipoDoc;
+            element.tipoPax = result.value.tipoPas;
+          }
+      });
+      this.boolCoti = true;
+      } else {
+        this.boolCoti = true;
+      }
+      
+    });
+
+
+  }
+
   saveData() {
-    this.spinner.show();
+    if (this.bookingForm.invalid) {
+      return;
+    } else {
+      this.spinner.show();
     let insert = this.sessionService.getInsertUpdate();
     const data = new FormData();
     data.append('IsInsert', insert);
     data.append('NroCotizacion', this.bookingForm.value.nroCotizacion);
-    data.append('CorrelativoCotizacion', '');
+    data.append('CorrelativoCotizacion', this.bookingForm.value.correlativoCotizacion);
     data.append('Programa', this.bookingForm.value.programa);
     data.append('Tarjeta', '');
     data.append('FechaCotizacion', this.bookingForm.value.fechaCre);
@@ -210,24 +252,44 @@ export class CotizacionNewComponent implements OnInit {
           this.route.navigate(['voucher-list']);
         } else {
           this.spinner.hide();
+          this.openSnackBar(x.message,'OK');
         }
         
       }
     )
+    }
+    
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
+  voucher(){
+    this.route.navigate(['voucher-list']);
   }
 
   initForm() {
-
-    this.bookingForm = this.fb.group({
-      nroCotizacion: new FormControl('', Validators.required),
-      programa: new FormControl('', Validators.required),
-      responsable: new FormControl('', Validators.required),
-      precioBase: new FormControl('', Validators.required),
-      cargos: new FormControl('', Validators.required),
-      precioTotal: new FormControl('', Validators.required),
-      moneda: new FormControl('', Validators.required),
-      fechaCre: new FormControl('', Validators.required)
-    });
+    if (this.dataUser != null) {
+      this.bookingForm = this.fb.group({
+        nroCotizacion: new FormControl(this.dataUser.nroCotizacion, Validators.required),
+        programa: new FormControl(this.dataUser.programa, Validators.required),
+        responsable: new FormControl('', Validators.required),
+        tarjeta: new FormControl(this.dataUser.tarjeta, Validators.required),
+        fechaCre: new FormControl(this.dataUser.fechaCreacion, Validators.required),
+        correlativoCotizacion: new FormControl(this.dataUser.correlativoCotizacion, Validators.required)
+      });
+    } else {
+      this.bookingForm = this.fb.group({
+        nroCotizacion: new FormControl('', Validators.required),
+        programa: new FormControl('', Validators.required),
+        responsable: new FormControl('', Validators.required),
+        tarjeta: new FormControl('', Validators.required),
+        fechaCre: new FormControl('', Validators.required),
+        correlativoCotizacion: new FormControl('', Validators.required)
+      });
+    }
+    
   }
 
 }

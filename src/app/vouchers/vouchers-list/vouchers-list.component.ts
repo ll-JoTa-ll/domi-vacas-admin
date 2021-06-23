@@ -1,6 +1,7 @@
 import { flatten } from '@angular/compiler';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -29,6 +30,14 @@ export class VouchersListComponent implements OnInit {
   boolCoti = false;
   boolWeb = false;
   dataCot;
+  showWeb = false;
+  showReceptivo = true;
+  eventEditForm: FormGroup;
+  selectedStatus:  number ;  
+  list: [
+    {"name": "Receptivo Offline", ID: "D1", "checked": true},
+    {"name": "Ventas Web", ID: "D2", "checked": false}
+  ]
  
   displayedColumns: string[] = [ 'nroCotizacion', 'programa', 'tarjeta', 'fechaCreacionShow', 'estado','isActive','edit'];
   displayedWeb: string[] = [ 'codeTransaction', 'servicio', 'tipoPago', 'nombreContacto', 'correoContacto'];
@@ -41,8 +50,12 @@ export class VouchersListComponent implements OnInit {
   
 
   ngOnInit() {
-    
-    
+    this.labelPosition = 1;
+    this.valor(this.labelPosition);
+  }
+
+  voucher(){
+    this.router.navigate(['package/list'])
   }
 
   addCoti(){
@@ -50,18 +63,21 @@ export class VouchersListComponent implements OnInit {
     this.router.navigate(['voucher-new']);
   }
 
-  getCotizacion(valor,setBool){
+  getCotizacion(valor,setBool, user){
 
     this.sessionService.setInsertUpdate(setBool);
+    
     this.spinner.show();
    
     console.log(valor);
     this.service.GetCotizacion(valor).subscribe(
       x => {
         if(x === null){
-
+          this.sessionService.setUser(user);
+          this.router.navigate(['voucher-new']);
           this.spinner.hide();
         } else {
+          this.sessionService.setUser(null);
           this.sessionService.setCotizacionDetail(x);
           this.router.navigate(['voucher-detail']);
         }
@@ -73,6 +89,8 @@ export class VouchersListComponent implements OnInit {
   valor(val){
     if (val === 1) {
       this.spinner.show();
+      this.showWeb = false;
+      this.showReceptivo = true;
       let web = document.getElementById('web')
       web.style.display = "none";
       let vou = document.getElementById('coti')
@@ -81,6 +99,8 @@ export class VouchersListComponent implements OnInit {
       
     } else {
       this.spinner.show();
+      this.showWeb = true;
+      this.showReceptivo = false;
       let vou = document.getElementById('coti')
       vou.style.display = "none";
       let web = document.getElementById('web')
@@ -130,6 +150,13 @@ export class VouchersListComponent implements OnInit {
         this.spinner.hide();
       }
     )
+  }
+
+  applyFilterSource(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   applyFilter(filterValue: string) {

@@ -2,6 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -26,12 +27,12 @@ export class CotizacionDetailComponent implements OnInit {
   dataServices;
   boolCoti = true;
   boolService = true;
-  displayedService: string[] = ['tipo', 'destino', 'fechaInicio', 'fechaFin', 'precioBase', 'cargos', 'moneda', 'detalle', 'isActive'];
+  displayedService: string[] = ['tipo', 'destino', 'fechaInicio', 'fechaFin', 'precioBase', 'cargos', 'moneda', 'detalle', 'isActive','edit'];
   displayedColumns: string[] = ['nombres', 'apellidos', 'tipoDocumento', 'numeroDocumento', 'correo', 'telefono', 'tipoPax', 'fechaNacimiento', 'isActive','edit'];
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   constructor(private fb: FormBuilder,private spinner: NgxSpinnerService ,public dialog: MatDialog, private sessionService: SessionService,
-    private voucherService: VoucherService, private route : Router) { }
+    private voucherService: VoucherService, private route : Router,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.initForm();
@@ -58,6 +59,10 @@ export class CotizacionDetailComponent implements OnInit {
     });
 
 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   showDialogPassengerEdit(valor) {
@@ -88,6 +93,44 @@ export class CotizacionDetailComponent implements OnInit {
       this.boolCoti = true;
       } else {
         this.boolCoti = true;
+      }
+      
+    });
+
+
+  }
+
+  voucher(){
+    this.route.navigate(['voucher-list']);
+  }
+
+  showDialogServiceEdit(valor) {
+    this.boolService = false;
+    const dialogRef = this.dialog.open(DialogAddServiceComponent, {
+      data: valor,
+      height: 'auto',
+      width: 'auto',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if (result != null && result != undefined) {
+        this.dataServices.forEach(element => {
+          if (element.serviciosId === valor.serviciosId) {
+            element.cargos = result.value.cargos;
+            element.destino = result.value.destino;
+            element.detalle = result.value.detalle;
+            element.fechaFin = result.value.fechaFin;
+            element.fechaInicio = result.value.fechaInicio;
+            element.isActive = result.value.activo;
+            element.moneda = result.value.moneda;
+            element.precioBase = result.value.precioBase;
+            element.tipo = result.value.tipo;
+          }
+      });
+      this.boolService = true;
+      } else {
+        this.boolService = true;
       }
       
     });
@@ -168,7 +211,10 @@ export class CotizacionDetailComponent implements OnInit {
   }
 
   saveData() {
-    this.spinner.show();
+    if (this.bookingForm.value.fechaCre === "" || this.bookingForm.value.fechaCre === null) {
+      return;
+    } else {
+      this.spinner.show();
     let insert = this.sessionService.getInsertUpdate();
     const data = new FormData();
     data.append('IsInsert', insert);
@@ -249,10 +295,13 @@ export class CotizacionDetailComponent implements OnInit {
           this.route.navigate(['voucher-list']);
         } else {
           this.spinner.hide();
+          this.openSnackBar(x.message,'OK');
         }
         
       }
     )
+    }
+    
   }
 
 

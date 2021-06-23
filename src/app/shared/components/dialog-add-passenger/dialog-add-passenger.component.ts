@@ -9,7 +9,7 @@ import { DialogAddVoucherComponent } from '../dialog-add-voucher/dialog-add-vouc
   selector: 'app-dialog-add-passenger',
   templateUrl: './dialog-add-passenger.component.html',
   styleUrls: ['./dialog-add-passenger.component.css'],
-  providers: [VoucherService, NgxSpinnerService, DialogAddVoucherComponent],
+  providers: [VoucherService, NgxSpinnerService, DialogAddVoucherComponent,DialogAddPassengerComponent],
 })
 export class DialogAddPassengerComponent implements OnInit {
 
@@ -22,6 +22,7 @@ export class DialogAddPassengerComponent implements OnInit {
     { value: 'INF', viewValue: 'Infante' },
     { value: 'CHD', viewValue: 'Niño' }
   ];
+  edit;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private service: VoucherService, private spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -43,6 +44,7 @@ export class DialogAddPassengerComponent implements OnInit {
 
   initForm() {
     if (this.data === null) {
+      this.edit = false;
       this.bookingForm = this.fb.group({
         cotizacionesPasajeroId: new FormControl(''),
         nombre: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z ]*"),]),
@@ -57,6 +59,7 @@ export class DialogAddPassengerComponent implements OnInit {
         activo: new FormControl(''),
       });
     } else {
+      this.edit = true;
       let date = new Date(this.data.fechaNacimiento);
       this.bookingForm = this.fb.group({
         cotizacionesPasajeroId: new FormControl(this.data.cotizacionesPasajeroId),
@@ -86,8 +89,14 @@ export class DialogAddPassengerComponent implements OnInit {
   }
 
   showDialogVoucher() {
+    let datos;
+    if (this.edit === true){
+      datos = this.bookingForm.value.lvoucher;
+    } else {
+      datos = null;
+    }
     const dialogRef = this.dialog.open(DialogAddVoucherComponent, {
-      data: null,
+      data: datos,
       height: 'auto',
       width: 'auto',
     });

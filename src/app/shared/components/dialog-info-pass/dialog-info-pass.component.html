@@ -1,0 +1,26 @@
+<div *ngFor="let item of data; let i = index;" style="display: inline-grid;"  mat-dialog-content>
+    <br>
+    <p><strong>Pasajero {{i+1}}</strong></p>
+    <div class="dm-justify">
+        <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+        <span>Nombre : {{item.fullName}}</span>
+    </div>
+    <div class="dm-justify">
+        <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+        <span>Tipo Documento: {{item.documentType}}</span>
+    </div>
+    <div class="dm-justify">
+        <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+        <span>Numero Documento: {{item.documentNumber}}</span>
+    </div>
+    <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Email: {{item.email}}</span>
+    </div>
+    <div class="dm-justify">
+      <img src="assets/images/garrapata.svg" style="width: 24px;padding-right: 10px;">
+      <span>Telefono: {{item.phone}}</span>
+    </div>
+    <br>
+  </div>
+  

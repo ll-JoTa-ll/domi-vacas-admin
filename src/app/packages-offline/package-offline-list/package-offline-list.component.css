@@ -1,0 +1,36 @@
+.dm-form-field {
+    width: 200px;
+    margin: 8px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  button {
+    margin: 16px 8px;
+  }
+  
+  .dm-margin {
+    margin: 0 10px;
+  }
+  
+  .dm-center {
+    margin: 0 auto;
+  }
+  
+  .buttons{
+    margin-left: 80%;
+    }
+  
+  .dm-table {
+    width: 98%;
+    margin: 0 auto;
+  }
+  
+  .showPlus:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: darkblue;
+  }
+  

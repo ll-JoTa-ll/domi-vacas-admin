@@ -59,6 +59,10 @@ import { DialogAddPassengerComponent } from './shared/components/dialog-add-pass
 import { DialogAddServiceComponent } from './shared/components/dialog-add-service/dialog-add-service.component';
 import { DialogAddVoucherComponent } from './shared/components/dialog-add-voucher/dialog-add-voucher.component';
 import { CotizacionNewComponent } from './vouchers/cotizacion-new/cotizacion-new.component';
+import { PackagesOfflineComponent } from './packages-offline/packages-offline.component';
+import { PackageOfflineListComponent } from './packages-offline/package-offline-list/package-offline-list.component';
+import { PackageOfflineDetailComponent } from './packages-offline/package-offline-detail/package-offline-detail.component';
+import { DialogInfoPassComponent } from './shared/components/dialog-info-pass/dialog-info-pass.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -71,7 +75,9 @@ const routes: Routes = [
   { path: 'orders', component: OrderListComponent },
   { path: 'voucher-list', component: VouchersListComponent },
   { path: 'voucher-detail', component: CotizacionDetailComponent },
-  { path: 'voucher-new', component: CotizacionNewComponent }
+  { path: 'voucher-new', component: CotizacionNewComponent },
+  { path: 'package-offline-list', component: PackageOfflineListComponent },
+  { path: 'package-offline-detail', component: PackageOfflineDetailComponent }
 ];
 
 
@@ -107,7 +113,11 @@ const routes: Routes = [
     DialogAddPassengerComponent,
     DialogAddServiceComponent,
     DialogAddVoucherComponent,
-    CotizacionNewComponent
+    CotizacionNewComponent,
+    PackagesOfflineComponent,
+    PackageOfflineListComponent,
+    PackageOfflineDetailComponent,
+    DialogInfoPassComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +143,7 @@ const routes: Routes = [
     MatDialogModule,
     NgxSpinnerModule,
     MatSnackBarModule,
+    MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     AngularEditorModule,
@@ -161,7 +172,8 @@ const routes: Routes = [
     DialogInfoComponent,
     DialogAddPassengerComponent,
     DialogAddServiceComponent,
-    DialogAddVoucherComponent
+    DialogAddVoucherComponent,
+    DialogInfoPassComponent
    ],
   bootstrap: [AppComponent]
 })

@@ -54,7 +54,24 @@
 }
   
 
+.input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #F44336;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+}
 
+.input-file {
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
 
 .example-margin {
     margin: 0 10px;

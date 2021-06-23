@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Agregar Voucher</h2>
 <div style="text-align: center;">
-    <img src="{{img}}" style="width: 114px;"><br>
+    <!-- <img src="{{img}}" style="width: 114px;"><br> -->
 </div>
 
 
@@ -24,13 +24,15 @@
 
 
         <div class="filaFlex">
-            <div class="mitadFila">
+            <div style="width: 40%;">
 
                 <input (change)="voucherFIle($event)" class="input-file" id="voucherFile" type="file"
                     accept="">
-                <label tabindex="0" for="voucherFile" class="input-file-trigger">Seleccione su Archivo</label>
+                <label tabindex="0" for="voucherFile" class="input-file-trigger">{{texto}}</label>
 
+                <span *ngIf="edit" style="text-decoration: underline;color: blue;cursor: pointer;" (click)="document()">{{documento}} </span>
             </div>
+            <div style="width: 10%;"></div>
             <div class="mitadFila">
                 <mat-checkbox formControlName="activo">Activo</mat-checkbox>
             </div>
@@ -41,7 +43,7 @@
 
     </form>
 
-    <div class="fila">
+    <div class="fila" style="margin-top: 40px;">
         <div class="filaFlex box-shadow">
           <div class="apc-text-header"  style="width: 20% !important;">Titulo</div>
           <div class="apc-text-21" style="width: 20% !important;">Tipo</div>
@@ -55,17 +57,17 @@
         <div class="filaFlex box-shadow">
             <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.titulo}}</div>
             <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.tipo}}</div>
-            <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.name}}</div>
+            <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.nombreOriginal}}</div>
           <div class="m-0 p-0 text-center apc-text-content" style="width: 20% !important;">{{pasajero.isActive}}</div>
-          <div class="m-0 p-0 text-center apc-text-21" style="width: 20% !important;">Actualizar</div>
+          <div class="m-0 p-0 text-center apc-text-21" style="width: 20% !important;"><button mat-raised-button color="warn" (click)="editVoucher(pasajero)">Actualizar Datos</button></div>
         </div>
         </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <div style="width: 20%;margin: 0px 10px;">
-        <button class="dm-button-back btn-wrap" [mat-dialog-close]="null">Cancelar</button>
+    <div *ngIf="showButonEdit" style="width: 20%;margin: 0px 10px;">
+        <button class="dm-button-back btn-wrap" (click)="actualizar()">Actualizar</button>
     </div>
-    <button class="dm-button-back1 btn-wrap" (click)="addVoucher()">Añadir</button>
+    <button *ngIf="showButonAdd" class="dm-button-back1 btn-wrap" (click)="addVoucher()">Añadir</button>
     <button class="dm-button-back2 btn-wrap" [mat-dialog-close]="this.dataSource" >Finalizar</button>
 </mat-dialog-actions>
 

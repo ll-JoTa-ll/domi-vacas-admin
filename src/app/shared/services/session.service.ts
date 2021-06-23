@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 const PRE_BOOKING = 'list-detail';
 const REPORT_DETAIL = 'report-detail';
+const PACKAGE_DETAIL = 'package-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,13 @@ export class SessionService {
 
   getReportDetail(): any {
     return JSON.parse(sessionStorage.getItem(REPORT_DETAIL));
+  }
+
+  setPackageDetail(value: any) {
+    sessionStorage.setItem(PACKAGE_DETAIL, JSON.stringify(value));
+  }
+
+  getPackageDetail(): any {
+    return JSON.parse(sessionStorage.getItem(PACKAGE_DETAIL));
   }
 }

@@ -1,0 +1,46 @@
+<div  class="pag-detail">
+    <div class="title">
+      <h1>Detalles de tu Reserva</h1>
+      <div class="buttons" >
+        <button mat-raised-button class="dm-button" (click)="back()">Retroceder</button>
+      </div>
+  
+  </div>
+
+  
+    <div class="container">
+      <section class="product">
+        <div class="articleImg" style="text-align: center;">
+          <img src="assets/images/reports/playa.svg" style="width: 55px;">
+        </div>
+        <div class="article">
+          <span class="textVuelo">{{data.packageName}} </span><br>
+          <span class="textVuelo">Cod. Transaccion: {{data.transactionCode}} </span>
+        </div>
+        <div class="article">
+  
+            <button mat-raised-button color="primary" (click)="showDialogPass(data.lPassengers)">Ver Pasajeros</button>
+        </div>
+        <div class="article" style="text-align: center;">
+          <button *ngIf="cip" mat-raised-button color="primary"  (click)="update(data.transactionCode)">Asignar Cip</button>
+          <button *ngIf="!cip" mat-raised-button color="primary"  disabled>Asignar Cip</button>
+        </div>
+  
+      </section>
+      <section class="conTramo">
+        <div class="tramo">
+          <span class="textTramo">Tiempo de Estadia: {{data.nights}} y {{data.days}} dias</span><br>
+          <span class="textTramo">Categoria: {{data.category}}</span><br>
+          <span class="textTramo">Salidas: {{data.departureDates}}</span><br>
+  <!--         <img src="assets/images/reports/phone.svg" style="width: 20px;margin-right: 12px;">
+          <span>{{data.ohotel.telephoneNumber}}</span> -->
+        </div>
+      </section>
+    </div>
+  
+
+  </div>
+  
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>

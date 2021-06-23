@@ -26,6 +26,9 @@ export class VoucherService {
     private url_document: string = environment.url_customer + 'DocumentType/';
     private url_currency: string = environment.url_customer + 'Currency/';
     private url_sendData: string = environment.baseUrl + 'Cotizaciones/InsertUpdateCotizaciones';
+    private url_packages: string = environment.baseUrl + 'Report/GetPackageOfflineList';
+    private url_packages_detail: string = environment.baseUrl + 'Report/GetPackageOfflineDetail';
+    private url_update_payment: string = environment.baseUrl + 'Transaction/UpdatePaymentOffline';
 
     ListCotizacion(): Observable<any[]> {
         httpOptions.headers = new HttpHeaders({
@@ -33,6 +36,14 @@ export class VoucherService {
             'Content-Type': 'application/json'
         });
         return this.http.get<any[]>(`${this.url_search}`, httpOptions);
+      }
+
+      ListPackages(): Observable<any[]> {
+        httpOptions.headers = new HttpHeaders({
+            'Ocp-Apim-Subscription-Key': environment.subsKey,
+            'Content-Type': 'application/json'
+        });
+        return this.http.get<any[]>(`${this.url_packages}`, httpOptions);
       }
 
       ListWeb(): Observable<any[]> {
@@ -50,6 +61,24 @@ export class VoucherService {
         });
         const url = `${this.url_cotizacion}?${'nroCotizacion=' + data}`;
         return this.http.get<any[]>(url, httpOptions);
+      }
+
+      getPackageDetail(data): Observable<any[]> {
+        httpOptions.headers = new HttpHeaders({
+            'Ocp-Apim-Subscription-Key': environment.subsKey,
+            'Content-Type': 'application/json'
+        });
+        const url = `${this.url_packages_detail}${'/' + data}`;
+        return this.http.get<any[]>(url, httpOptions);
+      }
+
+      UpdatePayment(data): Observable<any> {
+        httpOptions.headers = new HttpHeaders({
+            'Ocp-Apim-Subscription-Key': environment.subsKey,
+            'Content-Type': 'application/json'
+        });
+        const url = `${this.url_update_payment}${'/' + data}`;
+        return this.http.post<any>(url, httpOptions);
       }
 
       getDocument(): Observable<any> {

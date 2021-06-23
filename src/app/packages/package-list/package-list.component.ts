@@ -49,6 +49,10 @@ export class PackageListComponent implements OnInit {
     this.router.navigate(['voucher-list']);
   }
 
+  packagesOffline(){
+    this.router.navigate(['package-offline-list']);
+  }
+
   reports(){
     this.router.navigate(['reports']);
   }
